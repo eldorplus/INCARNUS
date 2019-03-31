@@ -1,0 +1,71 @@
+<div class="dialog_popup">
+    <h1 class="popup_title text-center">Sign Up</h1>
+    <div class="popup_content">
+        <p>Enter Username and password to sign In</p>
+
+        <div>
+            <mat-form-field class="col-sm-12 p_0">
+                <mat-select placeholder="Select Title" [formControl]="title" required>
+                    <mat-option [value]="''"> Select Title </mat-option>
+                    <mat-option *ngFor="let sl of titleList" [value]="sl._id">
+                        {{sl.valuedescription}}
+                    </mat-option>
+                </mat-select>
+
+            </mat-form-field>
+            <mat-form-field class="col-sm-12 p_0">
+                <input matInput placeholder="First Name" [formControl]="fname" required>
+
+            </mat-form-field>
+            <mat-form-field class="col-sm-12 p_0">
+                <input matInput placeholder="Last Name" [formControl]="lname" required>
+
+            </mat-form-field>
+            <mat-form-field class="col-sm-12 p_0">
+                <input matInput placeholder="Middle Name" [formControl]="mname">
+
+            </mat-form-field>
+            <mat-form-field class="col-sm-12 p_0">
+                <mat-select placeholder="Select Gender" [formControl]="gender" required>
+                    <mat-option [value]="''"> Select Gender </mat-option>
+                    <mat-option *ngFor="let sl of genderList" [value]="sl._id">
+                        {{sl.valuedescription}}
+                    </mat-option>
+                </mat-select>
+
+            </mat-form-field>
+            <mat-form-field class="col-sm-12 p_0">
+                <input matInput placeholder="Enter your email" [formControl]="email">
+
+            </mat-form-field>
+            <mat-form-field class="col-sm-12 p_0">
+                <input matInput placeholder="Phone Number" [formControl]="phone" required>
+
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-12 p_0">
+                <input [formControl]="dob" matInput [matDatepicker]="picker" placeholder="DOB" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-sm-12 p_0">
+                <input matInput placeholder="Comment" [formControl]="comment">
+
+            </mat-form-field>
+            <mat-form-field class="col-sm-12 p_0" *ngIf="isVerifyCode">
+                <input matInput placeholder="Please enter verification code received by sms" [formControl]="verifyCode" required>
+                <button *ngIf="isVerifyCode" (click)="Verify()" class="col-sm-12 p_0" [disabled]="(title.invalid || fname.invalid|| lname.invalid|| dob.invalid|| gender.invalid || phone.invalid)"
+                    mat-raised-button color="primary">Resend</button>
+            </mat-form-field>
+            <!-- <a routerlink="" class="col-sm-12 p_0 text-right">Forgot Password?</a> -->
+
+            <div class="submit_btn">
+                <button *ngIf="!isVerifyCode" (click)="Verify()" class="col-sm-12 p_0" [disabled]="(title.invalid || fname.invalid|| lname.invalid|| dob.invalid|| gender.invalid || phone.invalid)"
+                    mat-raised-button color="primary">Verify</button>
+                <button *ngIf="isVerifyCode" (click)="Submit()" class="col-sm-12 p_0" [disabled]="(title.invalid || fname.invalid|| lname.invalid|| dob.invalid|| gender.invalid || phone.invalid || verifyCode.invalid)"
+                    mat-raised-button color="primary">Submit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
