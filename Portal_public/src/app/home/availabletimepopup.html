@@ -1,0 +1,12 @@
+    <!-- <button mat-button (click)="onNoClick()">Close</button> -->
+<div class="avilable_popup">
+  <p>
+    Do you want to Book appointment as Existing Patient or New Patient
+</p>
+
+<div mat-dialog-actions>
+
+    <button mat-raised-button class="theme_btn"  (click)="signin()" [mat-dialog-close]="data.animal" cdkFocusInitial>Existing Patient</button>
+    <button mat-raised-button class="theme_btn1" (click)="signup()" [mat-dialog-close]="data.animal" cdkFocusInitial>New Patient</button>
+  </div>
+</div>

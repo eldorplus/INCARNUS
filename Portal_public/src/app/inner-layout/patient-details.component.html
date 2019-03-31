@@ -1,0 +1,195 @@
+<div class="patientDetailsForm">
+    <div class="top-nav1 ">
+        <!-- navigation -->
+        <div class="top-nav w3-agiletop" style="padding:0!important;">
+            <div class="container">
+                <div class="navbar-header w3llogo">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h1>
+                        <a href="#">
+                            <img src="assets/images/logo.png" class="img-fluid">
+                        </a>
+                    </h1>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="w3menu navbar-right">
+                        <ul class="nav navbar">
+                            <li>
+                                <a [routerLink]="['/home']">Book appoinment</a>
+                            </li>
+                            <!-- <li><a  (click)="signin()">sign In</a></li> -->
+                            <li class="user_info">
+
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+        <!-- //navigation -->
+    </div>
+    <section class="visting_page">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <!-- {{this.profile.firstname}} -->
+                    <div *ngIf="patientCard" class="card">
+                        <div class="front" style="height: auto;padding-bottom: 10px;">
+                            <div class="profile_bg"></div>
+                            <div class="profile">
+                                <img *ngIf="patientPhoto==''" style="width: 100px;height: 100px;"
+                                    class="doctor_profile_infoimg" src="assets/images/doctor_img.jpg">
+                                <img *ngIf="patientPhoto!=''" style="width: 100px;height: 100px;"
+                                    class="doctor_profile_infoimg" src='data:image/jpg;base64,{{patientPhoto}}' />
+
+                            </div>
+                            <div class="text-center">
+                                <h3 class="h3">{{patientCard.firstname}}</h3>
+                                <p class="">{{patientCard.genderuid.valuecode}}</p>
+                            </div>
+                            <!-- <p class="date_birth" *ngIf="patientCard.dateofbirth">DOB:
+                                {{patientCard.dateofbirth | date:'shortDate'}}</p>
+                            <div class="vistier_details">
+                                <p class=""> {{patientCard.contact.mobilephone}}</p>
+                                <p class="">{{patientCard.contact.emailid}}</p>
+                            </div> -->
+                            <!-- <div class="vistier_details">
+                                <p class="">{{patientCard.address.address}}, {{patientCard.address.area}},
+                                    {{patientCard.address.city}}- {{patientCard.address.zipcode}},
+                                    {{patientCard.address.state}}, {{patientCard.address.country}}.
+                                </p>
+                            </div> -->
+                            <div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+
+                    <form *ngIf="frmPatientInfo" [formGroup]="frmPatientInfo">
+                        <mat-card>
+                            <div>
+                                <h3 class="formheading">Basic Information</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <mat-select placeholder="Select Title" formControlName="Title" required>
+                                            <mat-option [value]="''"> Select Title </mat-option>
+                                            <mat-option *ngFor="let sl of titleList" [value]="sl._id">
+                                                {{sl.valuedescription}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <input matInput formControlName="FirstName" placeholder="First Name">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <input matInput formControlName="MiddleName" placeholder="Middle Name">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <input matInput formControlName="LastName" placeholder="Last Name">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <input formControlName="DOB" matInput [matDatepicker]="picker" placeholder="DOB"
+                                            required>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <mat-select placeholder="Select Gender" formControlName="Gender" required>
+                                            <mat-option [value]="''"> Select Gender </mat-option>
+                                            <mat-option *ngFor="let sl of genderList" [value]="sl._id">
+                                                {{sl.valuedescription}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <input matInput formControlName="WorkPhone" placeholder="WorkPhone">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <input matInput formControlName="MobileNo" placeholder="MobileNo">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <input matInput formControlName="EmailId" placeholder="EmailId">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="formheading">Communication Address</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <input matInput formControlName="Address" placeholder="Address">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <input matInput formControlName="Area" placeholder="Area">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <input matInput formControlName="City" placeholder="City">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <input matInput formControlName="State" placeholder="State">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <input matInput formControlName="Country" placeholder="Country">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <input matInput formControlName="ZipCode" placeholder="ZipCode">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div style="float:right;">
+                                        <button [disabled]="frmPatientInfo.invalid" (click)="Save()"
+                                            class="col-sm-3 p_0" mat-raised-button color="primary">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<app-footer></app-footer>

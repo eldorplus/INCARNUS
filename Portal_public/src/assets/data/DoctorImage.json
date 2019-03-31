@@ -1,0 +1,53 @@
+[{
+  "_id" : ObjectId("5c6457ea777dc1f51cdd5cc5"),
+  "doctorid" : ObjectId("5c6451c7777dc1f51cdd575c"),
+  "doctorphoto" : "Photo of RAJA",
+  "comments" : "Photo of RAJA",
+  "createdby" : "Raja",
+  "createdat" : ISODate("2018-10-30T10:29:20.456Z"),
+  "modifiedby" : "Raja",
+  "modifiedat" : ISODate("2018-10-30T10:29:20.456Z"),
+  "statusflag" : "A",
+  "orguid" : ObjectId("569794170946a3d0d588efe6")
+},
+
+{
+  "_id" : ObjectId("5c645844777dc1f51cdd5d23"),
+  "doctorid" : ObjectId("5c4c436a53600e2f6c1477de"),
+  "doctorphoto" : "Photo of RAM",
+  "comments" : "Photo of RAM",
+  "createdby" : "Raja",
+  "createdat" : ISODate("2018-10-30T10:29:20.456Z"),
+  "modifiedby" : "Raja",
+  "modifiedat" : ISODate("2018-10-30T10:29:20.456Z"),
+  "statusflag" : "A",
+  "orguid" : ObjectId("569794170946a3d0d588efe6")
+}
+]
+
+
+
+
+
+
+
+
+
+
+
+// [
+//   {"_id" : ObjectId("5c6457ea777dc1f51cdd5cc5"),"doctorid" : ObjectId("5c6451c7777dc1f51cdd575c"),"doctorphoto" : "Photo of RAJA","comments" : "Photo of RAJA","createdby" : "Raja","createdat" : ISODate("2018-10-30T10:29:20.456Z"),"modifiedby" : "Raja","modifiedat" : ISODate("2018-10-30T10:29:20.456Z"),"statusflag" : "A","orguid" : ObjectId("569794170946a3d0d588efe6")},
+
+// {
+//   "_id" : ObjectId("5c645844777dc1f51cdd5d23"),
+//   "doctorid" : ObjectId("5c4c436a53600e2f6c1477de"),
+//   "doctorphoto" : "Photo of RAM",
+//   "comments" : "Photo of RAM",
+//   "createdby" : "Raja",
+//   "createdat" : ISODate("2018-10-30T10:29:20.456Z"),
+//   "modifiedby" : "Raja",
+//   "modifiedat" : ISODate("2018-10-30T10:29:20.456Z"),
+//   "statusflag" : "A",
+//   "orguid" : ObjectId("569794170946a3d0d588efe6")
+// }
+// ]

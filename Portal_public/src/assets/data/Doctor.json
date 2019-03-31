@@ -1,0 +1,203 @@
+{
+    "_id" : ObjectId("5c4c446153600e2f6c1477f2"),
+    "orguid" : ObjectId("569794170946a3d0d588efe6"),
+    "statusflag" : "A",
+    "modifiedat" : ISODate("2018-06-14T15:41:27.929Z"),
+    "modifiedby" : "Test1",
+    "createdat" : ISODate("2016-01-27T13:57:21.560Z"),
+    "createdby" : "Test1",
+    "contact" : {
+        "workphone" : null,
+        "mobilephone" : null,
+        "emailid" : null,
+        "weburl" : null
+    },
+    "address" : {
+        "address" : "Velachery, Chennai - 600100",
+        "area" : "Velachery",
+        "city" : "Chennai",
+        "state" : "Tamil Nadu",
+        "country" : "India",
+        "zipcode" : "600100"
+    },
+    "location" : "Velachery",
+    "specialtyuid" : ObjectId("56b8ac43f17d17e35cd3bb09"),
+    "companyname" : "Apollo Hospital",
+    "gstregno" : "",
+    "isgstregistered" : null,
+    "isradiologist" : false,
+    "isanaesthetist" : false,
+    "issurgeon" : false,
+    "isadmitconsultant" : true,
+    "isopconsultant" : true,
+    "iscareprovider" : true,
+    "doctorfeetypeuid" : null,
+    "titleuid" : ObjectId("56b8ac43f17d17e35cd3bb09"),
+    "activefrom" : ISODate("2017-06-30T15:40:50.735Z"),
+    "description" : "More than 30 years of experience as a Orthologist. ",
+    "name" : "Dr. RAMAKRISHNAN",
+    "printname" : "Dr. RAMAKRISHNAN",
+    "code" : "RAMKI",
+    "userwards" : null,
+    "primarydept" : "Ortho",
+    "visitingorgs" : [
+        {
+            "name" : "Cengild G.I Medical Centre",
+            "activefrom" : ISODate("2017-06-30T15:40:50.735Z"),
+            "activeto" : null
+        }
+    ],
+    "lastname" : "Murugan",
+    "nationality" : "Indian",
+    "dateofbirth" : ISODate("1967-06-30T15:40:50.735Z"),
+    "activeto" : null,
+    "qualification" : null,
+    "licensenumber" : "",
+    "providertypeuid" : null,
+    "businessregno" : null,
+    "licenseissuedate" : null,
+    "licenseexpirtydate" : null,
+    "islaboratorist" : null,
+    "companyaddress" : "",
+    "gstactivefrom" : null,
+    "genderuid" : ObjectId("56b8ac43f17d17e35cd3bb09")
+}
+
+{
+    "_id" : ObjectId("5c6451c7777dc1f51cdd575c"),
+    "orguid" : ObjectId("569794170946a3d0d588efe6"),
+    "statusflag" : "A",
+    "modifiedat" : ISODate("2018-06-14T15:41:27.929Z"),
+    "modifiedby" : "Test1",
+    "createdat" : ISODate("2016-01-27T13:57:21.560Z"),
+    "createdby" : "Test1",
+    "contact" : {
+        "workphone" : null,
+        "mobilephone" : null,
+        "emailid" : null,
+        "weburl" : null
+    },
+    "address" : {
+        "address" : "Velachery, Chennai - 600100",
+        "area" : "Velachery",
+        "city" : "Chennai",
+        "state" : "Tamil Nadu",
+        "country" : "India",
+        "zipcode" : "600100"
+    },
+    "location" : "Medavakkam",
+    "specialtyuid" : ObjectId("56b8ac43f17d17e35cd3bb09"),
+    "companyname" : "Apollo Hospital",
+    "gstregno" : "",
+    "isgstregistered" : null,
+    "isradiologist" : false,
+    "isanaesthetist" : false,
+    "issurgeon" : false,
+    "isadmitconsultant" : true,
+    "isopconsultant" : true,
+    "iscareprovider" : true,
+    "doctorfeetypeuid" : null,
+    "titleuid" : ObjectId("56b8ac43f17d17e35cd3bb09"),
+    "activefrom" : ISODate("2017-06-30T15:40:50.735Z"),
+    "description" : "More than 30 years of experience as a Orthologist. ",
+    "name" : "RAJA",
+    "printname" : "Dr. RAJA MURUGAN",
+    "code" : "RAJA",
+    "userwards" : null,
+    "primarydept" : "Ortho",
+    "visitingorgs" : [
+        {
+            "name" : "Cengild G.I Medical Centre",
+            "activefrom" : ISODate("2017-06-30T15:40:50.735Z"),
+            "activeto" : null
+        }
+    ],
+    "lastname" : "Murugan",
+    "nationality" : "Indian",
+    "dateofbirth" : ISODate("1967-06-30T15:40:50.735Z"),
+    "activeto" : null,
+    "qualification" : null,
+    "licensenumber" : "",
+    "providertypeuid" : null,
+    "businessregno" : null,
+    "licenseissuedate" : null,
+    "licenseexpirtydate" : null,
+    "islaboratorist" : null,
+    "companyaddress" : "",
+    "gstactivefrom" : null,
+    "genderuid" : ObjectId("56b8ac43f17d17e35cd3bb09")
+}
+
+{
+    "_id" : ObjectId("5c4c436a53600e2f6c1477de"),
+    "orguid" : ObjectId("569794170946a3d0d588efe6"),
+    "statusflag" : "A",
+    "modifiedat" : ISODate("2018-06-14T15:41:27.929Z"),
+    "modifiedby" : "Test1",
+    "createdat" : ISODate("2016-01-27T13:57:21.560Z"),
+    "createdby" : "Test1",
+    "contact" : {
+        "workphone" : null,
+        "mobilephone" : null,
+        "emailid" : null,
+        "weburl" : null
+    },
+    "address" : {
+        "address" : "Velachery, Chennai - 600100",
+        "area" : "Velachery",
+        "city" : "Chennai",
+        "state" : "Tamil Nadu",
+        "country" : "India",
+        "zipcode" : "600100"
+    },
+    "location" : "Mylapore",
+    "specialtyuid" : ObjectId("5c7124efa98ce04cd98a5eb8"),
+    "companyname" : "Apollo Hospital",
+    "gstregno" : "",
+    "isgstregistered" : null,
+    "isradiologist" : false,
+    "isanaesthetist" : false,
+    "issurgeon" : false,
+    "isadmitconsultant" : true,
+    "isopconsultant" : true,
+    "iscareprovider" : true,
+    "doctorfeetypeuid" : null,
+    "titleuid" : ObjectId("56b8ac43f17d17e35cd3bb09"),
+    "activefrom" : ISODate("2017-06-30T15:40:50.735Z"),
+    "description" : "More than 30 years of experience as a Orthologist. ",
+    "name" : "RAM",
+    "printname" : "Dr. RAM MURUGAN",
+    "code" : "RAM",
+    "userwards" : null,
+    "primarydept" : "Ortho",
+    "visitingorgs" : [
+        {
+            "name" : "Cengild G.I Medical Centre",
+            "activefrom" : ISODate("2017-06-30T15:40:50.735Z"),
+            "activeto" : null
+        }
+    ],
+    "lastname" : "Murugan",
+    "nationality" : "Indian",
+    "dateofbirth" : ISODate("1967-06-30T15:40:50.735Z"),
+    "activeto" : null,
+    "qualification" : null,
+    "licensenumber" : "",
+    "providertypeuid" : null,
+    "businessregno" : null,
+    "licenseissuedate" : null,
+    "licenseexpirtydate" : null,
+    "islaboratorist" : null,
+    "companyaddress" : "",
+    "gstactivefrom" : null,
+    "genderuid" : ObjectId("56b8ac43f17d17e35cd3bb09")
+}
+
+
+
+
+
+
+
+// {"_id" : ObjectId("5c4c446153600e2f6c1477f2"),"orguid" : ObjectId("569794170946a3d0d588efe6"),"statusflag" : "A","modifiedat" : ISODate("2018-06-14T15:41:27.929Z"),"modifiedby" : "Test1","createdat" : ISODate("2016-01-27T13:57:21.560Z"),"createdby" : "Test1","contact" : {"workphone" : null,"mobilephone" : null,"emailid" : null,"weburl" : null},"address" : {"address" : "Velachery, Chennai - 600100","area" : "Velachery","city" : "Chennai","state" : "Tamil Nadu","country" : "India","zipcode" : "600100"},"location" : "Velachery","specialtyuid" : ObjectId("56b8ac43f17d17e35cd3bb09"),"companyname" : "Apollo Hospital","gstregno" : "","isgstregistered" : null,"isradiologist" : false,"isanaesthetist" : false,"issurgeon" : false,"isadmitconsultant" : true,"isopconsultant" : true,"iscareprovider" : true,"doctorfeetypeuid" : null,"titleuid" : ObjectId("56b8ac43f17d17e35cd3bb09"),"activefrom" : ISODate("2017-06-30T15:40:50.735Z"),"description" : "More than 30 years of experience as a Orthologist. ","name" : "Dr. RAMAKRISHNAN","printname" : "Dr. RAMAKRISHNAN","code" : "RAMKI","userwards" : null,"primarydept" : "Ortho","visitingorgs" : [{"name" : "Cengild G.I Medical Centre","activefrom" : ISODate("2017-06-30T15:40:50.735Z"),"activeto" : null}],"lastname" : "Murugan","nationality" : "Indian","dateofbirth" : ISODate("1967-06-30T15:40:50.735Z"),"activeto" : null,"qualification" : null,"licensenumber" : "","providertypeuid" : null,"businessregno" : null,"licenseissuedate" : null,"licenseexpirtydate" : null,"islaboratorist" : null,"companyaddress" : "","gstactivefrom" : null,"genderuid" : ObjectId("56b8ac43f17d17e35cd3bb09")}
+

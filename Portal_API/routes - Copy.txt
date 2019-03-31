@@ -1,0 +1,86 @@
+module.exports = function(app) {
+
+    // server routes ===========================================================
+    // handle things like api calls
+    // authentication routes
+
+    // frontend routes =========================================================
+
+    //Security
+    var security = require('./common/security');
+    //  Authenticate 
+    app.post('./common/security/authenticate', security.checkloginpassword);
+    //  Change password 
+    app.post('./common/security/changepassword', security.changepassword);
+    //  Change password 
+    app.post('./common/security/resetpassword', security.resetpassword);
+    
+
+    //Doctors
+    var doctor = require('./appointment/doctor');
+    app.get('./appointment/doctor/test', doctor.test);
+    //  Doctor search
+    app.get('./appointment/doctor/search', doctor.search);
+    //  Get doctor photo
+    app.get('./appointment/doctor/getimagedetail/:id', doctor.getimagedetail);
+    //  Get doctor profile
+    app.get('./appointment/doctor/getdoctordetail/:id', doctor.getdoctordetail);
+
+    //Book Appointment
+    var appointment = require('./appointment/bookappointment');
+    //  To get upcoming appointments for the given patient
+    app.get('./appointment/bookappointment/futureappointments', appointment.getfutureappointmentforpatient);
+    //  To get appointment session for the doctor / location 
+    app.get('./appointment/bookappointment/getappointmentsessions', appointment.searchAppointmentSessions);
+    //  To get slot details for the appointment session
+    app.get('./appointment/bookappointment/getappointmentsessionslotdetails', appointment.getappointmentsessionslotdetails);
+    //  To get appointment schedule
+    app.get('./appointment/bookappointment/searchappointment', appointment.appointmentsearch);
+    //  To book new appointment
+    app.post('./appointment/bookappointment/addbooking', appointment.addbooking);
+    //  To modify appointment
+    app.post('./appointment/bookappointment/modifybooking', appointment.modifybooking);
+    //  To cancel appointment
+    app.post('./appointment/bookappointment/cancelbooking', appointment.cancelappointment);
+    //  To check max appointments
+    app.get('./appointment/bookappointment/checkmaxappointments', appointment.checkmaxappointments);
+    
+    
+    //Patient
+    var patient = require('./appointment/patient');
+    //  To get basic details of the patient for patient card display
+    app.get('./appointment/patient/getbasicdetail/:id', patient.getbasicdetail);
+    //  To get all details / documents of the patient
+    app.get('./appointment/patient/getfulldeatail/:id', patient.getdetail);
+    //  To creaate patient with basic details
+    app.post('./appointment/patient/create', patient.create);
+    //  To duplicate check of the patient basic details
+    app.get('./appointment/patient/checkpatientbybasicdetail', patient.checkpatientbybasicdetail);
+    //  To get patient id by mrn
+    app.get('./appointment/patient/getpatientbymrn', patient.getpatientuidbymrn);
+    
+
+    //Patient Reports
+    var report = require('./report/patientvisit');
+    //  Get list of Patients for the logged-in user (based on mobile number)
+    app.post('./report/patientvisit/getpatientuidbyloginid', report.getpatientuidbyloginid);
+    //  To get patient visits for the given patient 
+    app.get('./report/patientvisit/getvisitsforpatient/:id', report.getvisitsforpatient);
+    //  To get repots/documents list for the given patient visit
+    app.get('./report/patientvisit/getreportsforpatientvisit/:id', report.getreportsforpatientvisit);
+    //  To get document details for the given report
+    app.get('./report/patientvisit/getreportdetail/:id', report.getreportdetail);
+
+/*
+    //The thirdparty routes must always be at last.
+    //If any new routes file are required , please add above this.
+    require('./thirdparty/thirdparty_routes.js')(app);
+*/
+    // route to handle all angular requests
+    app.get('*', function(req, res) {
+        //res.sendfile('../public/index.html');
+        var path = require('path');
+        res.sendFile(path.resolve('public/index.html'));
+    });
+
+};

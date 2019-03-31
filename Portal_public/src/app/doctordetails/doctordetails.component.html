@@ -1,0 +1,238 @@
+<div class="home_bg" >
+  <!-- navigation -->
+  <div class="top-nav w3-agiletop">
+    <div class="container">
+      <div class="navbar-header w3llogo">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <h1><a href="#">
+          <img src="assets/images/{{logo}}" class="img-fluid">
+        </a></h1>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="w3menu navbar-right">
+          <ul class="nav navbar" >
+            <li><a [routerLink]="" >Home</a></li>
+            <li><a  (click)="signin()">sign In</a></li>
+            <li><a [routerLink]="" (click)="signup()" >Sign Up</a></li>
+          </ul>
+        </div>
+        <div class="clearfix"> </div>
+      </div>
+    </div>
+  </div>
+  <!-- //navigation -->
+
+
+
+
+  <div class="container home_banner_content">
+
+    <h1 class="title">Looking for Doctor?</h1>
+
+    <p>Book an appointment with your doctor who <br>is the perfect match for your medical needs.</p>
+
+    <form [formGroup]="doctorForm" novalidate>
+
+
+  <div class="row">
+    <div class="col-sm-6 doctor_search">
+        <!-- <div class="row p_lr_10">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-1 p_0"><i class="material-icons search_icons">star_border</i> </div>
+                  <div class="col-sm-11 p_0">
+                <mat-form-field class="col-sm-12 p_0">
+                  <mat-select formControlName="speciality" [(value)]="selectedname" placeholder="Select speciality" required>
+                    <mat-option  *ngFor="let doctortype of doctorinformation" [value]="doctortype.speciality">
+                      {{doctortype.speciality}}
+                    </mat-option>
+                   </mat-select>
+              <div *ngIf="doctorForm.controls['speciality'].invalid && (doctorForm.controls['speciality'].dirty || doctorForm.controls['speciality'].touched)" class="error-msg">
+                <div *ngIf="doctorForm.controls['speciality'].errors.required" >speciality is required.</div>
+              </div>
+                  </mat-form-field>
+            </div>
+          </div>
+        </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-1 p_0"><i class="material-icons search_icons">location_on</i> </div>
+                  <div class="col-sm-11 p_0">
+                      <mat-form-field class="col-sm-12 p_0">
+                          <mat-select placeholder="Select Location" [formControl]="locationsControl" required>
+                            <mat-option>--</mat-option>
+                            <mat-option *ngFor="let location of locations" [value]="location">
+                              {{location.name}}
+                            </mat-option>
+                          </mat-select>
+
+                        </mat-form-field>
+                  </div>
+                </div>
+
+            </div>
+
+        </div> -->
+        <!-- <div class="row p_lr_10">
+
+          <div class="col-sm-9 p_0">
+              <div class="row p_lr_10">
+                  <div class="col-sm-1 p_0"><i class="material-icons search_icons">person</i> </div>
+                <div class="col-sm-11 p_0">
+                    <mat-form-field class="col-sm-12 p_0">
+                        <input matInput placeholder="Doctor Name">
+                      </mat-form-field>
+                </div>
+              </div>
+
+        </div>
+
+      <div class="col-sm-3 text-right p_0">
+          <div >
+              <button #myInput [(ngModel)]="doctorname"  [disabled]="doctorForm.invalid" (click)="searchclick()" type="submit"   mat-raised-button color="accent">Search</button>
+           </div>
+       </div>
+        </div> -->
+    </div>
+  </div>
+
+</form>
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  	<!-- ======================== Doctor Profile ========================== -->
+  <section class="mrg_tb_40">
+  <div class="container">
+    <div class="row">
+       <div class="col-sm-12">
+          <mat-card>
+              <div class="main_title">
+                  <h1><i class="material-icons"> how_to_reg</i>book an appointment </h1>
+              </div>
+
+              <div class="container m_t_40">
+                 <h3 class="sub_title">
+                    Rainbow Children's Hospital & BirthRight by Rainbow, Banjara Hills
+
+                 </h3>
+                 <p>  Road No - 2, Banjara Hills, Near L V Prasad Eye Hospital, Next to Hotel Park Hyatt, Hyderabad - 500 034. Telangana, INDIA.
+                  </p>
+                      <div class="row m_t_40">
+                        <div class="col-sm-8">
+
+                  <div class="row">
+                      <div class="col-sm-5">
+                          <mat-form-field class="col-sm-12">
+                              <mat-select  (selectionChange)="doctortimetable($event.value)" placeholder="Select Specilaity" [(value)]="selectedValue">
+                                <mat-option  *ngFor="let doctortype of doctorinformation" [value]="doctortype.value">
+                                  {{doctortype.viewValue}}
+                                </mat-option>
+                               </mat-select>
+                            </mat-form-field>
+                       </div>
+                     <div class="col-sm-5">
+                          <mat-form-field class="col-sm-12">
+                              <mat-select  (selectionChange)="doctortimetable($event.value)" placeholder="Select location" [(value)]="selectedloaction">
+                                <mat-option  *ngFor="let loaction of doctorlocation" [value]="loaction.value">
+                                  {{loaction.viewValue}}
+                                </mat-option>
+                               </mat-select>
+                            </mat-form-field>
+                     </div>
+                     <!-- <div class="col-sm-2">
+                        <button mat-raised-button color="accent">Search</button>
+                     </div> -->
+                   </div>
+                        </div>
+                        <div class="col-sm-1"></div>
+                            <div class="col-sm-3">
+                                 <div class="col-sm-2">
+                                    <i class="material-icons">local_phone </i>
+                                 </div>
+                                 <div class="col-sm-10">
+                                    Give a miss call
+                                    1800 2122
+
+                                 </div>
+                        </div>
+                      </div>
+                 </div>
+              </mat-card>
+       </div>
+    </div>
+  </div>
+  </section>
+   	<!-- ======================== Doctor Profile ========================== -->
+
+    <!-- ======================== Doctor Time Table Code Start Here ========================== -->
+     <section class="" *ngIf="this.doctorprofiehidden==1">
+         <div class="container">
+           <div class="patient_portal_table">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef> No. </th>
+                  <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                </ng-container>
+
+
+
+                <!-- date Column -->
+                <ng-container matColumnDef="date">
+                  <th mat-header-cell *matHeaderCellDef> Date </th>
+                  <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                </ng-container>
+
+              <!-- morningtime Column -->
+                <ng-container matColumnDef="morningtime">
+                  <th mat-header-cell *matHeaderCellDef> Morning Time </th>
+                  <td mat-cell *matCellDef="let element" class="timing_btn">
+                      <button (click)="availabletime()"  mat-raised-button>{{element.morningtime}}</button>
+                     </td>
+                </ng-container>
+
+                <!-- eveningtime Column -->
+                <ng-container matColumnDef="eveningtime">
+                  <th mat-header-cell *matHeaderCellDef> Evening Time </th>
+                  <td mat-cell *matCellDef="let element" class="timing_btn">
+                      <button (click)="availabletime()"   mat-raised-button>{{element.eveningtime}}</button>
+                     </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+         </div>
+        </div>
+      </section>
+    <!-- ======================== Doctor Time Table Code End Here ========================== -->
+
+
+
+
+  	<!-- ======================== footer ========================== -->
+    <app-footer></app-footer>
+  	<!-- ======================== footer ========================== -->
