@@ -1,0 +1,43 @@
+[
+  {
+    "_id":"5c5e6aa1615a40889538ca73",
+    "patientuid":"569794170946a3d0d588efe6",
+    "entypeuid":null,
+    "visitid":"1003",
+    "visitstatusuid":"56b8ac43f17d17e35cd3bb09",
+    "startdate":"2019-02-01T18:30:00.000Z",
+    "visitcareproviders":{
+      "department":null,
+      "visittypeuid":null,
+      "careprovideruid":"5c4c436a53600e2f6c1477de",
+      "startdate":"2019-02-01T18:30:00.000Z",
+      "clinic":"Adyar",
+      "comments":"Sample data for visit",
+      "statusuid":null,
+      "outcomeuid":"56b8ac43f17d17e35cd3bb09",
+      "entypeuid":"56b8ac43f17d17e35cd3bb09",
+      "isprimarycareprovider":true,
+      "queuenumber":"12",
+      "enddate":"2019-02-01T18:30:00.000Z"}},
+      {
+        "_id":"5c5e6a54615a40889538ca5e",
+        "patientuid":"569794170946a3d0d588efe6",
+        "entypeuid":null,"visitid":"1002",
+        "visitstatusuid":"56b8ac43f17d17e35cd3bb09",
+        "startdate":"2019-01-11T18:30:00.000Z",
+        "visitcareproviders":{
+             "department":null,
+             "visittypeuid":null,
+             "careprovideruid":"5c4c436a53600e2f6c1477de",
+             "startdate":"2019-01-11T18:30:00.000Z",
+             "clinic":"Adyar",
+             "comments":"Sample data for visit",
+             "statusuid":null,
+             "outcomeuid":"56b8ac43f17d17e35cd3bb09",
+             "entypeuid":"56b8ac43f17d17e35cd3bb09",
+             "isprimarycareprovider":true,
+             "queuenumber":"22",
+             "enddate":"2019-01-21T18:30:00.000Z"
+            }
+             }
+        ]

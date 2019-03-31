@@ -1,0 +1,72 @@
+[
+  {
+      "_id" : ObjectId("5c644a15777dc1f51cdd5192"),
+      "patientvisituid" : ObjectId("5c5e6a54615a40889538ca5e"),
+      "documenttypeuid" : ObjectId("56b8ac43f17d17e35cd3bb09"),
+      "documentname" : "Blood Test Report",
+      "reportdocument" : "Blood Test Report",
+      "comments" : "Blood Sugar level, PH level",
+      "filetype" : "pdf",
+      "createdby" : "Raja",
+      "createdat" : ISODate("2018-10-30T10:29:20.456Z"),
+      "modifiedby" : "Raja",
+      "modifiedat" : ISODate("2018-10-30T10:29:20.456Z"),
+      "statusflag" : "A",
+      "orguid" : ObjectId("569794170946a3d0d588efe6")
+  },{
+      "_id" : ObjectId("5c644a4b777dc1f51cdd51b0"),
+      "patientvisituid" : ObjectId("5c5e6a54615a40889538ca5e"),
+      "documenttypeuid" : ObjectId("56b8ac43f17d17e35cd3bb09"),
+      "documentname" : "Abdomen Scan Report",
+      "reportdocument" : "Abdomen Scan Report",
+      "comments" : "Abdomen infection level",
+      "filetype" : "pdf",
+      "createdby" : "Raja",
+      "createdat" : ISODate("2018-10-30T10:29:20.456Z"),
+      "modifiedby" : "Raja",
+      "modifiedat" : ISODate("2018-10-30T10:29:20.456Z"),
+      "statusflag" : "A",
+      "orguid" : ObjectId("569794170946a3d0d588efe6")
+  }
+  ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// [
+// {"_id" : ObjectId("5c644a15777dc1f51cdd5192"),"patientvisituid" : ObjectId("5c5e6a54615a40889538ca5e"),"documenttypeuid" : ObjectId("56b8ac43f17d17e35cd3bb09"),"documentname" : "Blood Test Report","reportdocument" : "Blood Test Report","comments" : "Blood Sugar level, PH level","filetype" : "pdf","createdby" : "Raja","createdat" : ISODate("2018-10-30T10:29:20.456Z"),"modifiedby" : "Raja","modifiedat" : ISODate("2018-10-30T10:29:20.456Z"),"statusflag" : "A","orguid" : ObjectId("569794170946a3d0d588efe6")},
+// {
+// "_id" : ObjectId("5c644a4b777dc1f51cdd51b0"),
+// "patientvisituid" : ObjectId("5c5e6a54615a40889538ca5e"),
+// "documenttypeuid" : ObjectId("56b8ac43f17d17e35cd3bb09"),
+// "documentname" : "Abdomen Scan Report",
+// "reportdocument" : "Abdomen Scan Report",
+// "comments" : "Abdomen infection level",
+// "filetype" : "pdf",
+// "createdby" : "Raja",
+// "createdat" : ISODate("2018-10-30T10:29:20.456Z"),
+// "modifiedby" : "Raja",
+// "modifiedat" : ISODate("2018-10-30T10:29:20.456Z"),
+// "statusflag" : "A",
+// "orguid" : ObjectId("569794170946a3d0d588efe6")
+// }
+// ]
