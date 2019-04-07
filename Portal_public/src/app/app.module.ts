@@ -59,6 +59,7 @@ import { InnerLayoutComponent } from './inner-layout/inner-layout.component';
 import { CancelAppoinmentDialog } from './inner-layout/cancel-appointment-popup';
 import { PatientDetailsComponent } from './inner-layout/patient-details.component';
 import { DoctorDetailsComponent } from './inner-layout/doctor-details.component';
+import { AppTranslationModule } from './app.translation.module';
 
 @NgModule({
   declarations: [
@@ -118,6 +119,7 @@ import { DoctorDetailsComponent } from './inner-layout/doctor-details.component'
     MatTooltipModule,
     MatTreeModule,
     BrowserAnimationsModule,
+    AppTranslationModule
   ],
   entryComponents: [
     SigninDialog, SignupDialog,CancelAppoinmentDialog,DialogOverviewExampleDialog

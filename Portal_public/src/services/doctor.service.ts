@@ -104,6 +104,12 @@ export class DoctorService {
     return this.http.post<any>('http://localhost:8080/appointment/doctor/savedoctorphoto', { 'filepath': data });
   }
 
+  savedoctorinformation(data: any) {
+    return this.http.post<any>('http://localhost:8080/interface/savedoctorinformation', data);
+  }
+
+
+
  
 
   // To create schedule 

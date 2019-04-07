@@ -23,3 +23,30 @@
 .patientDetailsForm .doctorProfile .locationicon{
     color: #af2746;
 }
+.patientDetailsForm .doctorProfile .separtor{
+    border-top: 1px solid #ccc;
+    margin-top: 5px;
+    padding: 5px;
+}
+.patientDetailsForm .doctorProfile .titles{
+    font-size: 18px;
+    text-align: left;
+    padding: 0px 10px 10px;
+    border-bottom: 1px solid #ccc;
+    margin: 5px;
+}
+.patientDetailsForm .doctorProfile .scontent{
+    text-align: left;
+    padding: 5px 10px;
+}
+.patientDetailsForm .doctorProfile .slabel{
+    color: #2bab9a;
+    padding: 5px;   
+    font-size: 14px;
+    line-height: 27px;
+}
+
+.patientDetailsForm .doctorProfile .svalue{
+    padding: 5px;
+    font-size: 14px;
+}

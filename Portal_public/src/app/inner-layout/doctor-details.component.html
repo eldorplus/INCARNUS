@@ -12,7 +12,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <h1>
-                        <a href="#">
+                        <a routerLink="/home">
                             <img src="assets/images/logo.png" class="img-fluid">
                         </a>
                     </h1>
@@ -43,7 +43,7 @@
                 <div class="col-sm-4">
                     <!-- {{this.profile.firstname}} -->
                     <div *ngIf="doctorData" class="card">
-                        <div class="front" style="height: auto;padding-bottom: 10px;">
+                        <div class="front" style="height: auto;padding-bottom: 10px;position: relative;">
                             <div class="profile_bg"></div>
                             <div class="profile">
                                 <img *ngIf="doctorImage==''" style="width: 100px;height: 100px;"
@@ -55,9 +55,51 @@
                             <div class="text-center doctorProfile">
                                 <h3 class="h3">{{doctorData.doctor.printname}}</h3>
                                 <p class="">{{doctorData.doctor.description}}</p>
-                                <p class=""><i class="material-icons hospitalicon"> local_hospital
-                                    </i><b class="hospitalname">{{doctorData.doctor.companyname}}</b></p>                               
-                                <i class="material-icons locationicon"> location_on </i> <b class="hospitalname">{{doctorData.doctor.location}}</b>
+                                <p><i class="material-icons hospitalicon"> local_hospital
+                                    </i><b class="hospitalname">{{doctorData.doctor.companyname}}, </b> <span
+                                        style="color: #517da2;"
+                                        class="hospitalname">{{doctorData.doctor.location}}</span></p>
+                                <p class="separtor"></p>
+                                <div>
+                                    <h3 class="titles">Personality</h3>
+                                </div>
+                                <div class="scontent">
+                                    <span class="slabel">DOB</span>:<span
+                                        class="svalue">{{doctorData.doctor.dateofbirth | date:'shortDate'}}</span><br />
+                                    <span class="slabel">Gender</span>:<span
+                                        class="svalue">{{doctorGender}}</span><br />
+                                    <span class="slabel">Nationality</span>:<span
+                                        class="svalue">{{doctorData.doctor.nationality}}</span><br />
+                                    <span class="slabel">Qualification</span>:<span
+                                        class="svalue">{{doctorData.doctor.qualification}}</span>
+                                </div>
+                                <div>
+                                    <h3 class="titles">Address</h3>
+                                </div>
+                                <div class="scontent" *ngIf="doctorData.doctor.address">
+                                    <span class="slabel">Address</span>:<span
+                                        class="svalue">{{doctorData.doctor.address.address}}</span><br />
+                                    <span class="slabel">Area/City</span>:<span
+                                        class="svalue">{{doctorData.doctor.address.area}} /
+                                        {{doctorData.doctor.address.city}}</span><br />
+                                    <span class="slabel">State/Country</span>:<span
+                                        class="svalue">{{doctorData.doctor.address.state}} /
+                                        {{doctorData.doctor.address.country}} -
+                                        {{doctorData.doctor.address.zipcode}}</span>
+                                </div>
+                                <div>
+                                    <h3 class="titles">Contact</h3>
+                                </div>
+                                <div class="scontent" *ngIf="doctorData.doctor.contact">
+                                    <span class="slabel">Emailid</span>:<span
+                                        class="svalue">{{doctorData.doctor.contact.emailid}}</span><br />
+                                    <span class="slabel">MobileNo</span>:<span
+                                        class="svalue">{{doctorData.doctor.contact.mobilephone}}</span><br />
+                                    <span class="slabel">WorkPhone</span>:<span
+                                        class="svalue">{{doctorData.doctor.contact.workphone}}</span><br />
+                                    <span class="slabel">WebSite Url</span>:<span
+                                        class="svalue">{{doctorData.doctor.contact.weburl}}</span>
+                                </div>
                             </div>
                             <div>
                             </div>
@@ -66,112 +108,30 @@
                 </div>
                 <div class="col-sm-8">
 
-                    <form *ngIf="frmPatientInfo" [formGroup]="frmPatientInfo">
+                    <form *ngIf="frmDoctorInfo" [formGroup]="frmDoctorInfo">
                         <mat-card>
                             <div>
-                                <h3 class="formheading">Basic Information</h3>
+                                <h3 style="font-size: 19px;" class="formheading">Comments</h3>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <mat-form-field>
-                                        <mat-select placeholder="Select Title" formControlName="Title" required>
-                                            <mat-option [value]="''"> Select Title </mat-option>
-                                            <mat-option *ngFor="let sl of titleList" [value]="sl._id">
-                                                {{sl.valuedescription}}
-                                            </mat-option>
-                                        </mat-select>
-
+                                        <textarea rows="10" matInput formControlName="Description"
+                                            placeholder="Description"></textarea>
                                     </mat-form-field>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <mat-form-field>
-                                        <input matInput formControlName="FirstName" placeholder="First Name">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <input matInput formControlName="MiddleName" placeholder="Middle Name">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <input matInput formControlName="LastName" placeholder="Last Name">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <input formControlName="DOB" matInput [matDatepicker]="picker" placeholder="DOB"
-                                            required>
-                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker></mat-datepicker>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <mat-select placeholder="Select Gender" formControlName="Gender" required>
-                                            <mat-option [value]="''"> Select Gender </mat-option>
-                                            <mat-option *ngFor="let sl of genderList" [value]="sl._id">
-                                                {{sl.valuedescription}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <input matInput formControlName="WorkPhone" placeholder="WorkPhone">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <input matInput formControlName="MobileNo" placeholder="MobileNo">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <input matInput formControlName="EmailId" placeholder="EmailId">
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="formheading">Communication Address</h3>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <input matInput formControlName="Address" placeholder="Address">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <input matInput formControlName="Area" placeholder="Area">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <input matInput formControlName="City" placeholder="City">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <input matInput formControlName="State" placeholder="State">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <input matInput formControlName="Country" placeholder="Country">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <input matInput formControlName="ZipCode" placeholder="ZipCode">
+                                        <textarea rows="10" matInput formControlName="Urls"
+                                            placeholder="Reference Urls"></textarea>
                                     </mat-form-field>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div style="float:right;">
-                                        <button [disabled]="frmPatientInfo.invalid" (click)="Save()"
-                                            class="col-sm-3 p_0" mat-raised-button color="primary">Update</button>
+                                        <button [disabled]="frmDoctorInfo.invalid" (click)="Save()" class="col-sm-3 p_0"
+                                            mat-raised-button color="primary">Update</button>
                                     </div>
                                 </div>
                             </div>

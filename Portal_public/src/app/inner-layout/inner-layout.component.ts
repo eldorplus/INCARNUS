@@ -65,6 +65,7 @@ export class InnerLayoutComponent implements OnInit {
           // result.patientid
           this.useruid = result.userid;
           localStorage.setItem("userId",result.userid);
+         
           this._doctorService.getpatientsbylogin(this.useruid).subscribe(data => {
 
             this.detail = data.patient;
@@ -78,8 +79,9 @@ export class InnerLayoutComponent implements OnInit {
     }
     else {
       this._doctorService.getpatientsbylogin(userid).subscribe(data => {
+       
         this.detail = data.patient;
-        console.log(this.data);
+        console.log(data.patient);
       },
         error => {
           console.log(error);

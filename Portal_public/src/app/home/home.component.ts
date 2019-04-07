@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { DoctorService } from '../../services/doctor.service';
 // import { DoctorService } from '../../services/doctor.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 export interface DialogData {
   animal: string;
   name: string;
@@ -83,8 +84,11 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private formBuilder: FormBuilder,
-
-  ) { }
+    protected translate: TranslateService
+  ) {
+    translate.setDefaultLang('en');
+    translate.use('en');
+  }
   locationsControl = new FormControl('', [Validators.required]);
   selectFormControl = new FormControl('', Validators.required);
   locations: Animal[] = [
@@ -186,7 +190,7 @@ export class HomeComponent implements OnInit {
       this.docimg = '';
       if (s.doctorimage && s.doctorimage.length > 0)
         this.docimg = s.doctorimage[0].doctorphoto;
-     
+
     });
     debugger;
     // this.router.navigateByUrl('/doctorsdetais');
@@ -397,7 +401,7 @@ export class SigninDialog {
     if (this.mobileNo.valid && this.password.valid) {
       this._doctorService.authenticate(this.mobileNo.value, this.password.value).subscribe(
         s => {
-          localStorage.setItem("userId", s.useruid);
+          localStorage.setItem("userId", this.mobileNo.value);
 
           this.dialogRef.close({ type: 1, patientid: s.useruid, userid: this.mobileNo.value });
 
