@@ -19,7 +19,7 @@ export class PatientDetailsComponent implements OnInit {
     genderList: any[] = [];
     titleList: any[] = [];
     ngOnInit(): void {
-        this.route.paramMap.subscribe(params => {            
+        this.route.paramMap.subscribe(params => {
             this.doGetPatient(params.get("id"))
         })
     }
@@ -31,9 +31,9 @@ export class PatientDetailsComponent implements OnInit {
     }
     getTitleList() {
         this._doctorService.getTitleList().subscribe(
-          s => { this.titleList = s.dropdownlist; }
+            s => { this.titleList = s.dropdownlist; }
         );
-      }
+    }
     getGenderList() {
         this._doctorService.getGenderList().subscribe(
             s => { this.genderList = s.dropdownlist; }
@@ -42,21 +42,21 @@ export class PatientDetailsComponent implements OnInit {
     formInialize(PatienData: any) {
 
         this.frmPatientInfo = this._fb.group({
-            Title:[PatienData.titleuid._id, Validators.required],
+            Title: [PatienData.titleuid._id, Validators.required],
             FirstName: [PatienData.firstname, Validators.required],
             LastName: [PatienData.lastname, Validators.required],
             MiddleName: [PatienData.middlename],
             DOB: [PatienData.dateofbirth, Validators.required],
-            WorkPhone: [PatienData.contact.workphone, Validators.required],
-            MobileNo: [PatienData.contact.mobilephone, Validators.required],
-            EmailId: [PatienData.contact.emailid, Validators.required],
+            WorkPhone: [PatienData.contact ? PatienData.contact.workphone : '', Validators.required],
+            MobileNo: [PatienData.contact ? PatienData.contact.mobilephone : '', Validators.required],
+            EmailId: [PatienData.contact ? PatienData.contact.emailid : '', Validators.required],
             Gender: [PatienData.genderuid._id, Validators.required],
-            Address: [PatienData.address.address, Validators.required],
-            Area: [PatienData.address.area, Validators.required],
-            City: [PatienData.address.city, Validators.required],
-            State: [PatienData.address.state, Validators.required],
-            Country: [PatienData.address.country, Validators.required],
-            ZipCode: [PatienData.address.zipcode, Validators.required]
+            Address: [PatienData.address ? PatienData.address.address : '', Validators.required],
+            Area: [PatienData.address ? PatienData.address.area : '', Validators.required],
+            City: [PatienData.address ? PatienData.address.city : '', Validators.required],
+            State: [PatienData.address ? PatienData.address.state : '', Validators.required],
+            Country: [PatienData.address ? PatienData.address.country : '', Validators.required],
+            ZipCode: [PatienData.address ? PatienData.address.zipcode : '', Validators.required]
         });
     }
 
@@ -81,12 +81,12 @@ export class PatientDetailsComponent implements OnInit {
     Save() {
         if (this.frmPatientInfo.valid) {
             let values = this.frmPatientInfo.value;
-            this._doctorService.createPatient(values.FirstName,values.LastName,values.MiddleName,values.Gender,values.Title,values.DOB,values.WorkPhone,values.EmailId).subscribe(
+            this._doctorService.createPatient(values.FirstName, values.LastName, values.MiddleName, values.Gender, values.Title, values.DOB, values.WorkPhone, values.EmailId).subscribe(
                 s => {
                     this.snackBar.open("Patient Information Updated Successfully.", "", {
                         duration: 2000,
-                      });
-            
+                    });
+
                 }, e => { }
             );
             console.log(this.frmPatientInfo);

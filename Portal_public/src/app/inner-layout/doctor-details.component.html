@@ -19,7 +19,7 @@
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <div class="w3menu navbar-right">
+                    <div class="w3menu s-nav-bar">
                         <ul class="nav navbar">
                             <li>
                                 <a [routerLink]="['/home']">Book appoinment</a>
@@ -40,15 +40,15 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <!-- {{this.profile.firstname}} -->
                     <div *ngIf="doctorData" class="card">
                         <div class="front" style="height: auto;padding-bottom: 10px;position: relative;">
                             <div class="profile_bg"></div>
                             <div class="profile">
-                                <img *ngIf="doctorImage==''" style="width: 100px;height: 100px;"
+                                <img *ngIf="doctorImage==''" style="width: 80px;height: 80px;"
                                     class="doctor_profile_infoimg" src="assets/images/doctor_img.jpg">
-                                <img *ngIf="doctorImage!=''" style="width: 100px;height: 100px;"
+                                <img *ngIf="doctorImage!=''" style="width: 80px;height: 80px;"
                                     class="doctor_profile_infoimg" src='data:image/jpg;base64,{{doctorImage}}' />
 
                             </div>
@@ -58,14 +58,13 @@
                                 <p><i class="material-icons hospitalicon"> local_hospital
                                     </i><b class="hospitalname">{{doctorData.doctor.companyname}}, </b> <span
                                         style="color: #517da2;"
-                                        class="hospitalname">{{doctorData.doctor.location}}</span></p>
-                                <p class="separtor"></p>
+                                        class="hospitalname">{{doctorData.doctor.location}}</span></p>                            
                                 <div>
-                                    <h3 class="titles">Personality</h3>
+                                    <h3 class="titles"><i class="fas fa-user"></i>Personality</h3>
                                 </div>
                                 <div class="scontent">
                                     <span class="slabel">DOB</span>:<span
-                                        class="svalue">{{doctorData.doctor.dateofbirth | date:'shortDate'}}</span><br />
+                                        class="svalue">{{doctorData.doctor.dateofbirth | date:'dd-MM-yyyy'}}</span> 
                                     <span class="slabel">Gender</span>:<span
                                         class="svalue">{{doctorGender}}</span><br />
                                     <span class="slabel">Nationality</span>:<span
@@ -74,7 +73,7 @@
                                         class="svalue">{{doctorData.doctor.qualification}}</span>
                                 </div>
                                 <div>
-                                    <h3 class="titles">Address</h3>
+                                    <h3 class="titles"><i class="fas fa-address-card"></i>Address</h3>
                                 </div>
                                 <div class="scontent" *ngIf="doctorData.doctor.address">
                                     <span class="slabel">Address</span>:<span
@@ -88,7 +87,7 @@
                                         {{doctorData.doctor.address.zipcode}}</span>
                                 </div>
                                 <div>
-                                    <h3 class="titles">Contact</h3>
+                                    <h3 class="titles"><i class="fas fa-address-book"></i>Contact</h3>
                                 </div>
                                 <div class="scontent" *ngIf="doctorData.doctor.contact">
                                     <span class="slabel">Emailid</span>:<span
@@ -106,7 +105,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-9">
 
                     <form *ngIf="frmDoctorInfo" [formGroup]="frmDoctorInfo">
                         <mat-card>

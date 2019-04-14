@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { first } from 'rxjs/operators';
@@ -42,7 +42,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
   displayedColumns: string[] = ['position', 'date', 'morningtime'];
@@ -165,8 +166,8 @@ export class HomeComponent implements OnInit {
 
   formInitialize() {
     this.doctorForm = this.formBuilder.group({
-      speciality: [''],
-      location: [''],
+      speciality: [null],
+      location: [null],
       name: ['']
       // name: [this.data.name, Validators.required]
     });
@@ -399,16 +400,21 @@ export class SigninDialog {
   login() {
 
     if (this.mobileNo.valid && this.password.valid) {
+      debugger;
       this._doctorService.authenticate(this.mobileNo.value, this.password.value).subscribe(
         s => {
+          debugger;
           localStorage.setItem("userId", this.mobileNo.value);
+          localStorage.setItem("loginId", s.useruid);
 
-          this.dialogRef.close({ type: 1, patientid: s.useruid, userid: this.mobileNo.value });
+          this.dialogRef.close({ type: 1, patientid: s.useruid, userid: this.mobileNo.value, loginid: s.useruid });
 
           //this.router.navigateByUrl('/innerlayout');
         },
         e => {
-
+          this.snackBar.open("Username and Password Incorrect.", "x", {
+            duration: 2000,
+          });
         }
       );
     }
@@ -427,7 +433,7 @@ export class SigninDialog {
     public dialogRef: MatDialogRef<SigninDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private router: Router, private _doctorService: DoctorService,
-    private http: HttpClient
+    private http: HttpClient, private snackBar: MatSnackBar
   ) { }
 
   onNoClick(): void {

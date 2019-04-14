@@ -1,0 +1,198 @@
+.patient-page .mat-tab-label{
+    min-width: 100px; 
+}
+.patient-page .mat-tab-label .mat-tab-label-content{
+    font-size: 16px;
+    color: #000000;
+}
+.patient-page .mat-tab-group{
+    border: 1px solid #dedede;
+}
+.patient-page .patient-details-card{
+    padding: 0;
+}
+.patient-page .mat-tab-header{
+    background: #fbfbfb;
+}
+.patient-page .mat-tab-body{
+    padding: 2%;
+}
+.patient-page .page-heading{
+    color:#10457f;
+font-size:18px;
+font-weight:bolder;
+}
+.patient-page .box-icon{
+    display: inline-block;   
+    color: #fff;
+    height: 38px;
+    width: 40px;
+    text-align: center;
+    line-height: 44px;
+    vertical-align: top;
+}
+.patient-page .box1-content-bg{
+    background: #4e4a87;
+}
+.patient-page .box1-icon-bg{
+    background: #605ca8;
+}
+
+.patient-page .box2-content-bg{
+    background: #2a80c5;
+}
+.patient-page .box2-icon-bg{
+    background: #42a5f5;
+}
+
+
+.patient-page .box4-content-bg{
+    background: #d3870e;
+}
+.patient-page .box4-icon-bg{
+    background: #f39c11;
+}
+
+.patient-page .box3-content-bg{
+    background: #c43d2d;
+}
+.patient-page .box3-icon-bg{
+    background: #de4b39;
+}
+
+  
+
+.patient-page .box-content{
+    display: inline-block;
+    font-size: 15px;
+    width: calc(100% - 40px);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 38px;   
+    color: #fff;
+    line-height: 38px;
+    padding: 0 5px;
+}
+.patient-page .box-icon i{
+    font-size: 22px;
+}
+.patient-page .margintop18{
+    margin-top: 18px;
+}
+
+.patient-page .paddingleft0{
+    padding-left: 0;
+}
+
+.patient-page .paddingright0{
+    padding-right: 0;
+}
+.patient-page .titles{
+    color: #3b3b3b !important;
+    font-size: 17px !important;
+    margin: 18px 0 !important;
+    padding: 0 !important;
+}
+.patient-page .titles span{
+    margin-right: 10px;
+    font-size: 24px;
+}
+.patient-page .clearboth{
+    clear: both;
+}
+.patient-page .date_vist{
+    border: 1px solid #b8b8b8;  
+    padding: 8px;
+}
+.patient-page .date_vist .datestring{
+    color: #3b3b3b;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 22px;
+}
+.patient-page .date_vist .yearstring {
+    color: #10457f;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+}
+.patient-page .doctor_info h1{
+    color: #000000;
+    font-size: 15px;
+    padding: 0;
+    line-height: 24px;
+}
+.patient-page .doctor_info p{
+    color: #5e5e5e;
+    font-size: 15px;
+    line-height: 24px;
+}
+.patient-page .schedulebtn{
+    margin-right: 15px;
+    background: #10AACE;
+    border-radius: 0;
+    top: 15px;
+}
+.patient-page .pointer{
+    cursor: pointer;
+}
+.patient-page .patient-info-box{
+    position: relative;
+    top: -35px;
+}
+.patient-page .patient-info-box h3,.patient-info-box h3 i{
+    font-size: 16px;
+    color: #000000;
+}
+
+.patient-info-box p{
+      color: #565656;
+      font-size: 15px;
+}
+.patient-info-box .contact-details{
+    padding-left: 15px;
+    padding-top: 5px;
+}
+.patient-info-box .contact-details i{
+    margin-right: 5px;
+}
+.patient-page .card .front{
+height: auto;
+position: relative;
+}
+.patient-page .card{
+    min-height: auto;
+    border: 1px solid #dedede;
+    margin-bottom: 10px;
+
+}
+.patient-page .patient-profile{
+    height: auto;
+    background: #536D7A;
+    padding: 10px;
+    color: #fff;
+    font-size: 16px;
+}
+.patient-page .patient-profile-box{
+    list-style: none;
+    text-align: left;
+}
+.patient-profile-box li{
+    border-bottom: 1px solid #dedede;
+    padding: 10px 14px;
+    font-size: 15px;
+    color: #000000;
+    cursor: pointer;
+}
+.patient-profile-box li:hover{
+    text-decoration: underline;
+}
+.patient-profile-box li i{
+    margin-right: 10px;
+}
+.patient-page .appointment-card{
+    border: 1px solid #dedede; margin-bottom: 8px;
+    box-shadow: none;
+}

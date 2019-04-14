@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DoctorService } from '../../services/doctor.service';
 import { first } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { SignupDialog, SigninDialog } from '../home/home.component';
 import { CancelAppoinmentDialog } from './cancel-appointment-popup';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-inner-layout',
   templateUrl: './inner-layout.component.html',
-  styleUrls: ['./inner-layout.component.scss']
+  styleUrls: ['./inner-layout.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class InnerLayoutComponent implements OnInit {
   public pro = 'profile1.jpg';
@@ -35,8 +37,11 @@ export class InnerLayoutComponent implements OnInit {
   openPDF: string = '';
   patientReports: any[] = [];
   constructor(
-    private _doctorService: DoctorService, public dialog: MatDialog
-  ) { }
+    private _doctorService: DoctorService, public dialog: MatDialog, private translate: TranslateService
+  ) {
+    translate.setDefaultLang('en');
+    translate.use('en');
+  }
 
   ngOnInit() {
 
@@ -64,11 +69,13 @@ export class InnerLayoutComponent implements OnInit {
         if (result) {
           // result.patientid
           this.useruid = result.userid;
-          localStorage.setItem("userId",result.userid);
-         
+
           this._doctorService.getpatientsbylogin(this.useruid).subscribe(data => {
 
             this.detail = data.patient;
+            if (data.patient)
+              this.patientdetail(result.loginid, '');
+
             console.log(this.data);
           },
             error => {
@@ -78,8 +85,9 @@ export class InnerLayoutComponent implements OnInit {
       });
     }
     else {
+      this.patientdetail(localStorage.getItem("loginId"), '');
       this._doctorService.getpatientsbylogin(userid).subscribe(data => {
-       
+
         this.detail = data.patient;
         console.log(data.patient);
       },
@@ -90,18 +98,20 @@ export class InnerLayoutComponent implements OnInit {
   }
   patientPhoto: string = "";
   patientdetail(id, name) {
+    debugger;
     this.selectedPatientId = id;
-    // To get patient card details
-    this.selectedPatient = name;
+    // To get patient card details   
     this._doctorService.getpatientcarddetail(id).subscribe(
       s => {
+        debugger;
         this.patientCard = s.patient;
+        if (s.patient)
+          this.selectedPatient = (s.patient.firstname + ' ' + s.patient.lastname);
         this._doctorService.getpatientphoto(id).subscribe(
           s => {
             this.patientPhoto = '';
-            if (s.patientimage && s.patientimage.length > 0) {
-              this.patientPhoto = s.patientimage[0].patientphoto;
-            }
+            if (s.patientimage && s.patientimage.length > 0) 
+              this.patientPhoto = s.patientimage[0].patientphoto;            
           }
         );
       }
@@ -164,6 +174,87 @@ export class InnerLayoutComponent implements OnInit {
       // this.animal = result;
     });
   }
+
+
+  getAge(dateString) {
+    if (dateString && new Date(dateString)) {
+      var now = new Date();
+      var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      var yearNow = now.getFullYear();
+      var monthNow = now.getMonth();
+      var dateNow = now.getDate();
+      var dob = new Date(dateString);
+      var yearDob = dob.getFullYear();
+      var monthDob = dob.getMonth();
+      var dateDob = dob.getDate();
+      let age: any = {};
+      var ageString = "";
+      var yearString = "";
+      var monthString = "";
+      var dayString = "";
+      let yearAge = 0;
+
+      yearAge = yearNow - yearDob;
+
+      if (monthNow >= monthDob)
+        var monthAge = monthNow - monthDob;
+      else {
+        yearAge--;
+        var monthAge = 12 + monthNow - monthDob;
+      }
+
+      if (dateNow >= dateDob)
+        var dateAge = dateNow - dateDob;
+      else {
+        monthAge--;
+        var dateAge = 31 + dateNow - dateDob;
+
+        if (monthAge < 0) {
+          monthAge = 11;
+          yearAge--;
+        }
+      }
+
+      age = {
+        years: yearAge,
+        months: monthAge,
+        days: dateAge
+      };
+
+      if (age.years > 1) yearString = " Y";
+      else yearString = " year";
+      if (age.months > 1) monthString = " M";
+      else monthString = " month";
+      if (age.days > 1) dayString = " D";
+      else dayString = " day";
+
+
+      if ((age.years > 0) && (age.months > 0) && (age.days > 0))
+        ageString = age.years + yearString + ", " + age.months + monthString + ", and " + age.days + dayString + "";
+      else if ((age.years == 0) && (age.months == 0) && (age.days > 0))
+        ageString = "" + age.days + dayString + "";
+      else if ((age.years > 0) && (age.months == 0) && (age.days == 0))
+        ageString = age.years + yearString + " Happy Birthday!!";
+      else if ((age.years > 0) && (age.months > 0) && (age.days == 0))
+        ageString = age.years + yearString + " and " + age.months + monthString + " ";
+      else if ((age.years == 0) && (age.months > 0) && (age.days > 0))
+        ageString = age.months + monthString + " and " + age.days + dayString + "";
+      else if ((age.years > 0) && (age.months == 0) && (age.days > 0))
+        ageString = age.years + yearString + " and " + age.days + dayString + " ";
+      else if ((age.years == 0) && (age.months > 0) && (age.days == 0))
+        ageString = age.months + monthString + "";
+      else ageString = "";
+
+      return ageString;
+    }
+    else
+      return "";
+  }
+
+
+
+
+
 
 
 }

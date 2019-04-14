@@ -19,7 +19,7 @@
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <div class="w3menu navbar-right">
+                    <div class="w3menu s-nav-bar">
                         <ul class="nav navbar">
                             <li>
                                 <a [routerLink]="['/home']">Book appoinment</a>
@@ -40,7 +40,7 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <!-- {{this.profile.firstname}} -->
                     <div *ngIf="patientCard" class="card">
                         <div class="front" style="height: auto;padding-bottom: 10px;">
@@ -52,29 +52,14 @@
                                     class="doctor_profile_infoimg" src='data:image/jpg;base64,{{patientPhoto}}' />
 
                             </div>
-                            <div class="text-center">
+                            <div class="text-center patient-card">
                                 <h3 class="h3">{{patientCard.firstname}}</h3>
                                 <p class="">{{patientCard.genderuid.valuecode}}</p>
-                            </div>
-                            <!-- <p class="date_birth" *ngIf="patientCard.dateofbirth">DOB:
-                                {{patientCard.dateofbirth | date:'shortDate'}}</p>
-                            <div class="vistier_details">
-                                <p class=""> {{patientCard.contact.mobilephone}}</p>
-                                <p class="">{{patientCard.contact.emailid}}</p>
-                            </div> -->
-                            <!-- <div class="vistier_details">
-                                <p class="">{{patientCard.address.address}}, {{patientCard.address.area}},
-                                    {{patientCard.address.city}}- {{patientCard.address.zipcode}},
-                                    {{patientCard.address.state}}, {{patientCard.address.country}}.
-                                </p>
-                            </div> -->
-                            <div>
-                            </div>
-
+                            </div>  
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-9">
 
                     <form *ngIf="frmPatientInfo" [formGroup]="frmPatientInfo">
                         <mat-card>

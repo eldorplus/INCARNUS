@@ -2,14 +2,14 @@
     width:100%;
 }
 .patientDetailsForm .formheading{
-    font-size: 16px;
-    color: #384490;
-    text-decoration: underline;
+    color: #10457f;
+    font-size: 18px;
+    font-weight: bolder;
     margin-bottom: 10px;
 }
 .patientDetailsForm .h3{
-  font-size: 18px;
-  margin:0;
+  font-size: 16px;
+  margin: 0 0 5px 0;
 }
 .patientDetailsForm .doctorProfile .hospitalname{
     vertical-align: top;
@@ -29,24 +29,48 @@
     padding: 5px;
 }
 .patientDetailsForm .doctorProfile .titles{
-    font-size: 18px;
-    text-align: left;
-    padding: 0px 10px 10px;
-    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    text-align: left;   
+    border: 1px solid #ccc;
     margin: 5px;
+    background: #f1f1f1;
+    padding: 10px;
+    color: #1c4067;
+}
+.patientDetailsForm .doctorProfile .titles i{
+    margin-right:10px; 
 }
 .patientDetailsForm .doctorProfile .scontent{
     text-align: left;
     padding: 5px 10px;
+    margin: 5px;
+    background: #f9f9f9;
 }
 .patientDetailsForm .doctorProfile .slabel{
     color: #2bab9a;
     padding: 5px;   
-    font-size: 14px;
+    font-size: 13px;
     line-height: 27px;
 }
 
 .patientDetailsForm .doctorProfile .svalue{
     padding: 5px;
-    font-size: 14px;
+    font-size: 13px;
+}
+.patientDetailsForm .card,.patientDetailsForm .mat-card{
+    border: 1px solid #dededd;
+}
+.patientDetailsForm .doctorProfile{
+    top: -30px;
+    position: relative;
+}
+.patientDetailsForm .doctor_card,.patientDetailsForm .card .front,.patientDetailsForm .card .back{
+    position: relative;   
+}
+.patientDetailsForm .card{
+    min-height: auto;
+}
+.patientDetailsForm .patient-card{
+    top: -25px;
+    position: relative;
 }
