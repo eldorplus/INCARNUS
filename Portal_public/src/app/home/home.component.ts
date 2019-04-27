@@ -129,26 +129,27 @@ export class HomeComponent implements OnInit {
   locationlist: any[] = [];
   doctorsList: any[] = [];
   selecteddoctor: any = null;
+  loginUsername: string = "";
+  loginUserPhoto: string = "";
   ngOnInit() {
     this.formInitialize();
     this.getspecialtylist();
     this.getLocationlist();
-
-    // this.doctorsearchlist();
-    // //  this._doctorService.getDoctor();
-    // localStorage.setItem('doctorlocation', this.data.location);
-    // this.doctorprofiehidden = 0;
-    // this.doctorpro = true;
-    // this._doctorService.getDoctor()
-    //   .pipe(first())
-    //   .subscribe(data => {
-    //     this.data = data;
-    //     console.log(this.data);
-    //     this.doctorsearchlist();
-    //   },
-    //     error => {
-    //       console.log(error);
-    //     });
+    let userid = localStorage.getItem("loginId");
+    if (userid)
+      this._doctorService.getpatientcarddetail(userid).subscribe(
+        s => {
+          if (s.patient)
+            this.loginUsername = (s.patient.firstname + ' ' + s.patient.lastname);
+          this._doctorService.getpatientphoto(userid).subscribe(
+            s => {
+              this.loginUserPhoto = '';
+              if (s.patientimage && s.patientimage.length > 0)
+                this.loginUserPhoto = s.patientimage[0].patientphoto;
+            }
+          );
+        }
+      );
   }
 
   openDialog(obj): void {
@@ -405,8 +406,9 @@ export class SigninDialog {
         s => {
           debugger;
           localStorage.setItem("userId", this.mobileNo.value);
+          localStorage.setItem("userName", this.mobileNo.value);
           localStorage.setItem("loginId", s.useruid);
-
+          localStorage.setItem("extid", s.externalid);
           this.dialogRef.close({ type: 1, patientid: s.useruid, userid: this.mobileNo.value, loginid: s.useruid });
 
           //this.router.navigateByUrl('/innerlayout');

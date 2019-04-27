@@ -14,6 +14,11 @@ export class DoctorService {
   token: any;
   status: any;
   spec: any;
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    })
+  };
   constructor(private http: HttpClient) { }
   _doctorurl = 'http://localhost:8080/appointment/doctor/search';
 
@@ -81,7 +86,7 @@ export class DoctorService {
 
   // To get doctor photo for the doctor id 
   getdoctorphoto(doctorid: any) {
-    return this.http.post<any>('http://localhost:8080/appointment/doctor/getimagedetail/'+doctorid, { 'id': doctorid });
+    return this.http.post<any>('http://localhost:8080/appointment/doctor/getimagedetail/' + doctorid, { 'id': doctorid });
   }
 
   // To get doctor profile information for the doctor id 
@@ -110,7 +115,7 @@ export class DoctorService {
 
 
 
- 
+
 
   // To create schedule 
   createSchedule(sessionid: any, AppointmentDate: Date, slotuids: any[]) {
@@ -145,13 +150,7 @@ export class DoctorService {
   getpatientsbylogin(useruid) {
     // let myheader = new Headers({ 'content-type': 'application/json' });
     // let option = new RequestOptions({ headers: myheader });
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'my-auth-token',
-        responseType:'arraybuffer'
-      })
-    };
+
     let user = { 'useruid': useruid };
     return this.http.post<any>('http://localhost:8080/report/patientvisit/getpatientuidbyloginid', user);
   }
@@ -161,7 +160,7 @@ export class DoctorService {
     return this.http.post<any>('http://localhost:8080/appointment/patient/getbasicdetail', { 'id': patientid });
   }
 
-  
+
 
   getpatientphoto(patientid: any) {
     return this.http.post<any>('http://localhost:8080/appointment/patient/getpatientphoto', { 'id': patientid });
@@ -174,7 +173,7 @@ export class DoctorService {
 
   // To get future appointment information for the selected patient id & status 
   getfutureappointmentsforpatient(patientid: any) {
-    return this.http.post<any>(`${environment.apiUrl}/appointment/bookappointment/futureappointments`, { 'patientuid': patientid });
+    return this.http.post<any>('http://52.220.168.61:8090/framework/appointmentschedule/getfutureappointmentforpatient', { 'patientuid': patientid, 'curdate': new Date() });
   }
 
   //  To get report information for the selected patient visit id 

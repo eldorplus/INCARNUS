@@ -74,7 +74,7 @@ export class InnerLayoutComponent implements OnInit {
 
             this.detail = data.patient;
             if (data.patient)
-              this.patientdetail(result.loginid, '');
+              this.patientdetail(result.loginid, '', localStorage.getItem("extid"));
 
             console.log(this.data);
           },
@@ -85,10 +85,11 @@ export class InnerLayoutComponent implements OnInit {
       });
     }
     else {
-      this.patientdetail(localStorage.getItem("loginId"), '');
+
       this._doctorService.getpatientsbylogin(userid).subscribe(data => {
 
         this.detail = data.patient;
+        this.patientdetail(localStorage.getItem("loginId"), '', localStorage.getItem("extid"));
         console.log(data.patient);
       },
         error => {
@@ -97,30 +98,30 @@ export class InnerLayoutComponent implements OnInit {
     }
   }
   patientPhoto: string = "";
-  patientdetail(id, name) {
-    debugger;
+  patientdetail(id: any, name: string, extid: any) {
+
     this.selectedPatientId = id;
     // To get patient card details   
     this._doctorService.getpatientcarddetail(id).subscribe(
       s => {
-        debugger;
+
         this.patientCard = s.patient;
         if (s.patient)
           this.selectedPatient = (s.patient.firstname + ' ' + s.patient.lastname);
         this._doctorService.getpatientphoto(id).subscribe(
           s => {
             this.patientPhoto = '';
-            if (s.patientimage && s.patientimage.length > 0) 
-              this.patientPhoto = s.patientimage[0].patientphoto;            
+            if (s.patientimage && s.patientimage.length > 0)
+              this.patientPhoto = s.patientimage[0].patientphoto;
           }
         );
       }
     );
 
     // To get Upcomming Appoinments
-    this._doctorService.getfutureappointmentsforpatient(id).subscribe(s => {
-
-      this.patientUpcommingAppoinments = s.appointments;
+    this._doctorService.getfutureappointmentsforpatient((extid ? extid : id)).subscribe(s => {
+      if (s)
+        this.patientUpcommingAppoinments = s.appointments;
       console.log(s);
     });
 
@@ -128,6 +129,16 @@ export class InnerLayoutComponent implements OnInit {
     //  To get patient visit details 
     this._doctorService.getPatientVisits(id).subscribe(s => {
       this.patientvisits = s.patientvisits;
+      this.patientvisits.forEach(element => {
+        element["patientreports"] = [];
+        this._doctorService.getpatientreports(element._id).subscribe(s => {
+          s.patientreports.forEach(r => {
+            element["patientreports"].push(r);
+          });
+        });
+
+        console.log(this.patientvisits);
+      });
       console.log(s);
     });
 
@@ -143,7 +154,7 @@ export class InnerLayoutComponent implements OnInit {
 
   downloadReport(id) {
     this._doctorService.getreportdetail(id).subscribe(s => {
-      debugger;
+
       let result = s.PatientReport.reportdocument.data;
 
 
@@ -170,7 +181,7 @@ export class InnerLayoutComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      debugger;
+
       // this.animal = result;
     });
   }

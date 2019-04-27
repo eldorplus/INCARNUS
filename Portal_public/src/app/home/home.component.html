@@ -12,7 +12,7 @@
             <span class="icon-bar"></span>
           </button>
           <h1>
-            <a href="#">
+            <a routerLink="/home">
               <img src="assets/images/{{logo}}" class="img-fluid">
             </a>
           </h1>
@@ -22,10 +22,20 @@
           <div class="w3menu s-nav-bar">
             <ul class="nav navbar">
               <li>
-                <a [routerLink]="">{{'HOME' | translate}}</a>
+                <a routerLink="/home">{{'HOME' | translate}}</a>
               </li>
-              <li>
+              <li *ngIf="loginUsername==''">
                 <a (click)="signin()">{{'SIGNIN' | translate}}</a>
+              </li>
+              <li *ngIf="loginUsername!=''">
+                <a routerLink="/innerlayout">{{loginUsername}}
+                  <span>
+                    <img *ngIf="loginUserPhoto==''" style="width: 38px;height: 38px;top: -3px;"
+                      class="doctor_profile_infoimg" src="assets/images/doctor_img.jpg">
+                    <img *ngIf="loginUserPhoto!=''" style="width: 38px;height: 38px;top: -3px;"
+                      class="doctor_profile_infoimg" src='data:image/jpg;base64,{{loginUserPhoto}}' />
+                  </span>
+                </a>
               </li>
               <!-- <li>
               <a [routerLink]="" (click)="signup()">Sign Up</a>

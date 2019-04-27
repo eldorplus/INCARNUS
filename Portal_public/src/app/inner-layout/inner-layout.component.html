@@ -10,7 +10,7 @@
           <span class="icon-bar"></span>
         </button>
         <h1>
-          <a href="#">
+          <a routerLink="/home">
             <img src="assets/images/{{logo}}" class="img-fluid">
           </a>
         </h1>
@@ -36,7 +36,7 @@
               <mat-menu #menu="matMenu">
                 <button mat-menu-item *ngFor="let patientlog of detail">
                   <span
-                    (click)="patientdetail(patientlog._id,(patientlog.firstname+' '+patientlog.lastname))">{{patientlog.firstname}}
+                    (click)="patientdetail(patientlog._id,(patientlog.firstname+' '+patientlog.lastname),patientlog.externalid)">{{patientlog.firstname}}
                     {{patientlog.lastname}}</span>
                 </button>
               </mat-menu>
@@ -89,7 +89,8 @@
           <div class="front">
             <div class="patient-profile">{{'MYPROFILE'|translate}}</div>
             <ul class="patient-profile-box">
-              <li routerLink="/patient/{{selectedPatientId}}"><i class="fas fa-edit"></i>{{'EDITPROFILE'|translate}}</li>
+              <li routerLink="/patient/{{selectedPatientId}}"><i class="fas fa-edit"></i>{{'EDITPROFILE'|translate}}
+              </li>
               <li><i class="fas fa-lock"></i>{{'CHNAGEPASSWORD'|translate}}</li>
               <li><i class="fas fa-user-clock"></i>{{'SETUPNOTIFICATION'|translate}}</li>
               <li><i class="fas fa-sign-out-alt"></i>{{'SIGNOUT'|translate}}</li>
@@ -107,25 +108,29 @@
                   <div class="col-sm-3 paddingleft0">
                     <div class="pointer">
                       <div class="box-icon box1-icon-bg"><i class="far fa-calendar-alt"></i></div>
-                      <div class="box-content box1-content-bg" title="{{'REQUESTANAPPOINTMENT' | translate}}">{{'REQUESTANAPPOINTMENT' | translate}}</div>
+                      <div class="box-content box1-content-bg" title="{{'REQUESTANAPPOINTMENT' | translate}}">
+                        {{'REQUESTANAPPOINTMENT' | translate}}</div>
                     </div>
                   </div>
                   <div class="col-sm-3 paddingleft0">
                     <div class="pointer">
                       <div class="box-icon box2-icon-bg"><i class="far fa-comment-dots"></i></div>
-                      <div class="box-content box2-content-bg"  title="{{'CHATWITHDOCTOR' | translate}}">{{'CHATWITHDOCTOR'| translate}}</div>
+                      <div class="box-content box2-content-bg" title="{{'CHATWITHDOCTOR' | translate}}">
+                        {{'CHATWITHDOCTOR'| translate}}</div>
                     </div>
                   </div>
                   <div class="col-sm-3 paddingleft0 paddingright0">
                     <div class="pointer">
                       <div class="box-icon box3-icon-bg"><i class="fas fa-flask"></i></div>
-                      <div class="box-content box3-content-bg" title="{{'VIEWLABREPORTS' | translate}}">{{'VIEWLABREPORTS'| translate}}</div>
+                      <div class="box-content box3-content-bg" title="{{'VIEWLABREPORTS' | translate}}">
+                        {{'VIEWLABREPORTS'| translate}}</div>
                     </div>
                   </div>
                   <div class="col-sm-3 paddingright0">
                     <div class="pointer">
                       <div class="box-icon box4-icon-bg"><i class="fas fa-capsules"></i></div>
-                      <div class="box-content box4-content-bg" title="{{'MEDICATION' | translate}}">{{'MEDICATION'|translate}}</div>
+                      <div class="box-content box4-content-bg" title="{{'MEDICATION' | translate}}">
+                        {{'MEDICATION'|translate}}</div>
                     </div>
                   </div>
                 </div>
@@ -134,35 +139,35 @@
               <h1 class="titles"><span><i class="far fa-calendar-alt"></i></span>{{'UPCOMINGAPPOINTMENT'|translate}}
               </h1>
               <div class="visting_card">
-                <mat-card class="appointment-card"
-                  *ngIf="patientUpcommingAppoinments.length==0">
+                <mat-card class="appointment-card" *ngIf="patientUpcommingAppoinments.length==0">
                   <div class="row" style="padding: 0 10px;font-size: 13px;">
                     No Upcoming Appointments Found
                   </div>
                 </mat-card>
-                <mat-card class="appointment-card"
-                  *ngFor="let pv of patientUpcommingAppoinments">
+                <mat-card class="appointment-card" *ngFor="let pv of patientUpcommingAppoinments">
                   <div class="row">
-                    <div class="col-sm-2">
-                      <div class="date_vist">
-                        <p class="datestring">
-                          {{pv.start | date:'dd MMM'}}
-                        </p>
-                        <p class="yearstring">
-                          {{pv.start | date:'yyyy'}}
-                        </p>
+                    <div class="col-sm-12">
+                      <div class="col-sm-2">
+                        <div class="date_vist">
+                          <p class="datestring">
+                            {{pv.start | date:'dd MMM'}}
+                          </p>
+                          <p class="yearstring">
+                            {{pv.start | date:'yyyy'}}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-sm-8">
-                      <div class="doctor_info">
-                        <h1>{{pv.careprovideruid.name}}, {{pv.department}}</h1>
-                        <p> {{pv.start | date:'EEEE h:mm a'}} </p>
-                        <p> Appointment No - {{pv.appointmentnumber}} </p>
+                      <div class="col-sm-8">
+                        <div class="doctor_info">
+                          <h1>{{pv.careprovideruid.name}}, {{pv.department}}</h1>
+                          <p> {{pv.start | date:'EEEE h:mm a'}} </p>
+                          <p> Appointment No - {{pv.appointmentnumber}} </p>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-sm-2">
-                      <button (click)="cancelAppointmentPopup(pv._id)" mat-raised-button color="primary"
-                        class="appoment_btn schedulebtn">Cancel</button>
+                      <div class="col-sm-2">
+                        <button (click)="cancelAppointmentPopup(pv._id)" mat-raised-button color="primary"
+                          class="appoment_btn schedulebtn">Cancel</button>
+                      </div>
                     </div>
                   </div>
                 </mat-card>
@@ -175,45 +180,48 @@
                 </mat-card>
                 <mat-card class="appointment-card" *ngFor="let pv of patientvisits">
                   <div class="row">
-                    <div class="col-sm-2">
-                      <div class="date_vist">
-                        <p class="datestring">
-                          {{pv.startdate | date:'dd MMM'}}
-                        </p>
-                        <p class="yearstring">
-                          {{pv.startdate | date:'yyyy'}}
-                        </p>
+                    <div class="col-sm-12">
+                      <div class="col-sm-2">
+                        <div class="date_vist">
+                          <p class="datestring">
+                            {{pv.startdate | date:'dd MMM'}}
+                          </p>
+                          <p class="yearstring">
+                            {{pv.startdate | date:'yyyy'}}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-sm-8">
-                      <div class="doctor_info">
-                        <h1>{{pv.visitcareproviders.careprovideruid.printname}}, {{pv.visitcareproviders.department}}
-                        </h1>
-                        <p> {{pv.startdate | date:'EEEE h:mm a'}} </p>
-                        <p> {{pv.visitcareproviders.clinic}} </p>
+                      <div class="col-sm-8">
+                        <div class="doctor_info">
+                          <h1>{{pv.visitcareproviders.careprovideruid.printname}}, {{pv.visitcareproviders.department}}
+                          </h1>
+                          <p> {{pv.startdate | date:'EEEE h:mm a'}} </p>
+                          <p> {{pv.visitcareproviders.clinic}} </p>
+                        </div>
                       </div>
-                    </div>
-                    <div (click)="getReports(pv._id)" class="col-sm-2" style="position: relative;top:20px;left: 5%;">
-                      <mat-icon *ngIf="openPDF !=pv._id"
-                        style="height: 35px;width: 35px;font-size:35px;cursor: pointer;"
-                        class="mat-icon material-icons mat-icon-no-color">keyboard_arrow_right</mat-icon>
-                      <mat-icon *ngIf="openPDF==pv._id" style="height: 35px;width: 35px;font-size:35px;cursor: pointer;"
-                        class="mat-icon material-icons mat-icon-no-color">keyboard_arrow_down</mat-icon>
+                      <div class="col-sm-2" style="position: relative;top:20px;">
+                        <!-- <mat-icon *ngIf="openPDF==pv._id"
+                          style="height: 35px;width: 35px;font-size:35px;cursor: pointer;"
+                          class="mat-icon material-icons mat-icon-no-color">keyboard_arrow_right</mat-icon> -->
+                        <mat-icon 
+                          style="height: 35px;width: 35px;font-size:35px;cursor: pointer;"
+                          class="mat-icon material-icons mat-icon-no-color">keyboard_arrow_down</mat-icon>
+                      </div>
                     </div>
                   </div>
-                  <div style="background: #f0f0f0;padding: 10px;border: 1px solid #ccc;" *ngIf="openPDF==pv._id">
-                    <div style="border-right: 1px solid #ccc;width: 25%; display: inline-block;text-align: center;"
-                      *ngFor="let rpt of patientReports">
-                      <i style="font-size: 60px;display: block;color: #3d61ca;" class="material-icons">
+                  <div style="background: #f0f0f0;padding: 10px;border: 1px solid #ccc;">
+                    <div style="border-right: 1px solid #ccc;width: 20%; display: inline-block;text-align: center;"
+                      *ngFor="let rpt of pv.patientreports">
+                      <i style="font-size: 48px;display: block;color: #3d61ca;" class="material-icons">
                         picture_as_pdf
                       </i>
                       <span>{{rpt.documentname}}</span>
                       <div (click)="downloadReport(rpt._id)"
                         style="background: #337ab7; margin: 10px;padding: 3px;font-size: 12px;cursor: pointer;color: #fff;">
                         <span>Download</span>
-                      </div>
+                      </div> 
                     </div>
-                    <div *ngIf="patientReports.length ==0">
+                    <div *ngIf="pv && pv.patientreports.length ==0">
                       No Reports Available for this visit.
                     </div>
                   </div>
