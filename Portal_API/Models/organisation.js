@@ -35,6 +35,9 @@ var OrganisationSchema = new Schema({
     uid: { type: Number },
     /** Code {string} has to be unique */
     code: { type: String, required: true, index: true },
+    /** externalid {string} has to be unique */
+    externalid: { type: String },
+
     /** Name {string} defines the  name given to the organisation*/
     name: { type: String, required: true, index: true },
     /** description {string} - comments or text with additional details */
@@ -45,9 +48,9 @@ var OrganisationSchema = new Schema({
     activeto: Date,
     levelcode: String,
     /** parentorguid {ObjectId} - parent of this organisation in a hospital group*/
-    parentorguid: { type: Schema.ObjectId, ref: 'Organisation' },
+    //parentorguid: { type: Schema.ObjectId, ref: 'Organisation' },
     /** orgtypeuid {ObjectId} - type of the organisation such as primary care, acute care, etc*/
-    orgtypeuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
+    //orgtypeuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
     /** isgstregistered {Boolean} - whether the hospital is tax registered */
     isgstregistered: Boolean,
     /** gstregno {String} - tax registration number */
@@ -63,7 +66,7 @@ var OrganisationSchema = new Schema({
     /** Organisation Code {string} link to interface government*/
     organisationcode: String,
     /** preflanguid {ObjectId} - preferred language of the hospital - reference domain code : PRFLAN */
-    preflanguid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
+    //preflanguid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
     /** holidays {Date} - holidays of the organisation */
     holidays: [Date],
     /** emailid {string} Email id of the organisation */

@@ -297,3 +297,48 @@ exports.savedoctorinformation = function(req, res) {
         }
     });
 };
+
+
+exports.savedoctor = function(req, res) {
+    if (req.body.externalid != null) {
+        Doctor.findOneAndUpdate({
+            externalid: req.body.externalid
+        }, {
+            $set: {
+                name: req.body.name,
+                titleuid: req.body.selectedtitleuid,
+                genderuid: req.body.selectedgenderuid,
+                qualification: req.body.qualification,
+                userimageuid: req.body.userimageuid,
+                licensenumber: req.body.licensenumber,
+                modifiedat: new Date(),
+                modifiedby: req.session.useruid
+            }
+        }, {
+            safe: true,
+            upsert: true
+        }, function(err, docs) {
+            if (!err) {
+                res.status(200).json({});
+            } else {
+                //winston.error(err, {
+                //    timestamp: Date.now(),
+                //    pid: process.pid,
+                //    url: req.url
+                //});
+                res.status(500).json({
+                    error: 'ERRORS.UPDATEERROR'
+                });
+            }
+        });
+    } else {
+        //winston.error(null, {
+        //    timestamp: Date.now(),
+        //    pid: process.pid,
+        //    url: req.url
+        //});
+        res.status(500).json({
+            error: 'ERRORS.RECORDNOTFOUND'
+        });
+    }
+};

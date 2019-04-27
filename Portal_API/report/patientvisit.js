@@ -12,7 +12,7 @@ var resuable = require('../models/framework/reusableobjects');
 //  To get patient by Login ID - mobile number
 var getpatientuidbyloginid = function(req, res, callback) {
     //console.log(req.body.useruid);
-    var field = '_id firstname middlename lastname dateofbirth genderuid';
+    var field = '_id firstname middlename lastname dateofbirth genderuid externalid';
     var query = Patient.find({ loginid: req.body.useruid }, field);
     console.log("useruid -----------", req.body)
     query.populate('genderuid', 'valuedescription valuecode');

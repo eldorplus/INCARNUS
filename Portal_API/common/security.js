@@ -16,7 +16,7 @@ exports.checkloginpassword = function(req, res) {
     if (!loginid)
         return res.status(401).json({ error: 'ERRORS.INVALIDLOGINPWD' });
 
-    Patient.findOne({ loginid: loginid.toLowerCase() }, 'firstname middlename lastname mrn loginid password orguid patientimageuid', function(err, docs) {
+    Patient.findOne({ loginid: loginid.toLowerCase() }, 'firstname middlename lastname mrn loginid password orguid patientimageuid externalid', function(err, docs) {
         if (!err) {
             var usr = docs;
             console.log(usr);
@@ -35,7 +35,7 @@ exports.checkloginpassword = function(req, res) {
                     if (bres == true) {
                         req.session.useruid = usr.loginid;
                         req.session.username = usr.firstname + ' ' + usr.middlename + ' ' + usr.lastname;
-                        res.status(200).json({ useruid: usr._id });
+                        res.status(200).json({ useruid: usr._id , externalid: usr.externalid });
                     } 
                     else {
                         res.status(401).json({ error: 'ERRORS.INVALIDLOGINPWD' });

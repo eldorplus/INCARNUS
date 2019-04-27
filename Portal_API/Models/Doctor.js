@@ -28,6 +28,8 @@ var DoctorContactSchema = new Schema({
 });
 
 var DoctorSchema = new Schema({
+    /** externalid {string} has to be unique */
+    externalid: {type :String, index: true},       
     /** Code {string} has to be unique */
     code: { type: String, required: true, index: true },
     /** Name {string} Defines the Full Name Of user*/
@@ -38,7 +40,7 @@ var DoctorSchema = new Schema({
     /** dateofbirth  {Date} - Date of birth -- birth in PROVIDER file*/
     dateofbirth: Date,
     /** providertypeuid {ObjectId} - referencedomain code : PROVIDERTYPE -- providertype in PROVIDER file*/
-    providertypeuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
+    //providertypeuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
 
     /** Print Name {string} Defines the name to be printed in certificates report, etc*/
     printname: { type: String },
@@ -76,7 +78,7 @@ var DoctorSchema = new Schema({
     /** primarydeptuid {ObjectId} - Main department of the doctor*/
     primarydept: { type: String },
     /** doctorfeetypeuid {ObjectId} - reference value for the 'Doctor Fee type' - code DFFEET*/
-    doctorfeetypeuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
+    //doctorfeetypeuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
     /** iscareprovider {Boolean} - whether the user is  a doctor */
     iscareprovider: Boolean,
     /** isopconsultant {Boolean} - whether the OPD patients can be registered for this doctor  */
@@ -106,9 +108,9 @@ var DoctorSchema = new Schema({
     /** companyaddress {String} - address of the company */
     companyaddress: String,
     /** activefrom {Date} - start date for the gst */
-    gstactivefrom: Date,
+    //gstactivefrom: Date,
     /** activeto {Date} - end date or expiry date for the gst. Can be null for active departments. */
-    gstactiveto: Date,
+    //gstactiveto: Date,
     /** doctorimageuid {ObjectId} - link to the photograph of the doctor*/
     doctorimageuid: { type: Schema.ObjectId, ref: 'DoctorImage' },
     /** URLS , Links  */
@@ -123,7 +125,7 @@ var DoctorSchema = new Schema({
     }],
 
 
-    titlelocaluid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
+    //titlelocaluid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
 
     firstnamelocal : String,
 

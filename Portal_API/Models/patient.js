@@ -30,6 +30,8 @@ var PatientContactSchema = new Schema({
 
 
 var PatientSchema = new Schema({
+    /** externalid {string} has to be unique */
+    externalid: {type :String, index: true},       
     /** mrn {String} - medical record number to be generated uniquely for the patient usine sequence number generation */
     mrn: { type: String},
     /** internalmrn {String} - same as mrn without - . Used for Searching purposes. */
@@ -49,9 +51,9 @@ var PatientSchema = new Schema({
     /** externalpassword {String} - password of the user in md5 format for  */
     externalpassword: { type: String },
     /** isemailidverified {Boolean} - whether the user email id is verified*/
-    isemailidverified: Boolean,
+    //isemailidverified: Boolean,
     /** ismobileverified {Boolean} - whether the user mobile number  is verified*/
-    ismobileverified: Boolean,
+    //ismobileverified: Boolean,
 
     /** localfirstname {String} - the first part of local name of the patient */
     localfirstname: { type: String, index: true },
@@ -68,7 +70,7 @@ var PatientSchema = new Schema({
     /** isvip {Boolean} - whether patient is a very important patient (VIP) - defaults to false */
     isvip: { type: Boolean },
     /** viptypeuid {ObjectId} - reference domain code : VIPTYP */
-    viptypeuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
+    //viptypeuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
     /** isanonymous {Boolean} - whether anonymity has to be maintained about this patient - default false */
     isanonymous: { type: Boolean },
     /** dateofbirth {Date} - the date of birth of the patient (original or guess) */
@@ -76,19 +78,19 @@ var PatientSchema = new Schema({
     /** registereddate {Date} - the actual date of registration of the patient */
     registereddate: { type: Date, index: true },
     /** nationalityuid {ObjectId} - nationality of the patient reference domain code : NATNTY */
-    nationalityuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
+    //nationalityuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
     /** religionuid {ObjectId} - religion of the patient reference domain code : RELGON */
-    religionuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
+    //religionuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
     /** raceuid {ObjectId} - race of the patient reference domain code : RACE */
-    raceuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
+    //raceuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
     /** occupationuid {ObjectId} - occupation of the patient reference domain code : OCCUPN */
-    occupationuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
+    //occupationuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
     /** patienttypeuid {ObjectId} - patient type - reference domain code : PATTYP */
-    patienttypeuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
+    //patienttypeuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
     /** preflanguid {ObjectId} - preferred language of the patient - reference domain code : PRFLAN */
-    preflanguid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
+    //preflanguid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
     /** maritalstatusuid {ObjectId} - marital status of the patient - reference domain code : MARTST */
-    maritalstatusuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
+    //maritalstatusuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
     /** isinterpreterreqd {Boolean} - whether the patient requires interpreter - defaults to false */
     isinterpreterreqd: { type: Boolean },
     /** notes {String} - any comments, notes about the patient */
@@ -107,15 +109,15 @@ var PatientSchema = new Schema({
     patientimageuid: { type: Schema.ObjectId, ref: 'PatientImage' },
 
     /** bloodgroupuid {ObjectId} - reference domain BLDGRP*/
-    bloodgroupuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
+    //bloodgroupuid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
     /** rhfactoruid {ObjectId} - reference domain RHFACT*/
-    rhfactoruid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
+    //rhfactoruid: { type: Schema.ObjectId, ref: 'ReferenceValue' },
     /** hospitalnewstypeuids [] - Options to send hospital news to user - reference value code : NEWSTYP */
-    hospitalnewstypeuids: [{
-        type: Schema.ObjectId, ref: 'ReferenceValue'
-    }],
+    //hospitalnewstypeuids: [{
+    //    type: Schema.ObjectId, ref: 'ReferenceValue'
+    //}],
     /** hospnewsexpirydate {Date} - end date or expiry date for hospital news */
-    hospnewsexpirydate: Date,
+    //hospnewsexpirydate: Date,
     /** isemployee {Boolean} - whether the patient was hospital employee */
     isemployee: Boolean,
     patientdocuments: [{ documentuid: { type: Schema.ObjectId, ref: 'PatientDocument' } }]
