@@ -54,7 +54,7 @@
             </mat-form-field>
             <mat-form-field class="col-sm-12 p_0" *ngIf="isVerifyCode">
                 <input matInput placeholder="Please enter verification code received by sms" [formControl]="verifyCode" required>
-                <button *ngIf="isVerifyCode" (click)="Verify()" class="col-sm-12 p_0" [disabled]="(title.invalid || fname.invalid|| lname.invalid|| dob.invalid|| gender.invalid || phone.invalid)"
+                <button style="border-radius: 35px;width: 70px;float: right;" *ngIf="isVerifyCode" (click)="Verify()" class="col-sm-12 p_0" [disabled]="(title.invalid || fname.invalid|| lname.invalid|| dob.invalid|| gender.invalid || phone.invalid)"
                     mat-raised-button color="primary">Resend</button>
             </mat-form-field>
             <!-- <a routerlink="" class="col-sm-12 p_0 text-right">Forgot Password?</a> -->

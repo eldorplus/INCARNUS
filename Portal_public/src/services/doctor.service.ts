@@ -123,16 +123,13 @@ export class DoctorService {
   }
 
   //  To add booking 
-  createPatient(fname: any, lname: any, mname: any, gender: any, title: any, dob: any, phone: any, email: any) {
-    return this.http.post<any>('http://localhost:8080/appointment/patient/create', {
-      'firstname': fname, 'lastname': lname, 'middlename': mname,
-      'genderuid': gender, 'titleuid': title, 'dateofbirth': dob, 'mobilephone': phone, 'emailid': email
-    });
+  createPatient(params: any) {
+    return this.http.post<any>('http://52.220.168.61:8090/framework/patient/create', params);
   }
 
   //  To add booking 
-  addbooking(scheduleuid: any, start: any, end: any, patientuid: any, slotno: number) {
-    return this.http.post<any>('http://localhost:8080/appointment/bookappointment/addbooking', { 'scheduleuid': scheduleuid, 'start': start, 'end': end, 'description': '', 'patientuid': patientuid, 'isactive': true, 'slotno': slotno });
+  addbooking(param: any) {
+    return this.http.post<any>('http://52.220.168.61:8090/framework/appointmentschedule/addbooking', param);
   }
 
 
@@ -186,6 +183,12 @@ export class DoctorService {
     return this.http.post<any>('http://localhost:8080/report/patientvisit/getreportdetail', { 'id': reportid });
   }
 
+
+
+  // To get Report details for the report id 
+  getavailableslots(orguid: any, careprovideruid: any, fromdate: any, todate: any, departmentuid: any) {
+    return this.http.post<any>('http://52.220.168.61:8090/framework/appointmentschedule/getavaliableslots', { 'orguid': orguid, 'careprovideruid': careprovideruid, 'fromdate': fromdate, 'todate': todate, 'departmentuid': departmentuid });
+  }
 
 
 

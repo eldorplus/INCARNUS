@@ -26,5 +26,6 @@
     "EDITPROFILE": "Edit Profile",
     "CHNAGEPASSWORD": "Change Password",
     "SETUPNOTIFICATION": "Setup Notification",
-    "SIGNOUT": "Sign Out"
+    "SIGNOUT": "Sign Out",
+    "SELECTDEPARTMENT":"Select Department"
 }

@@ -93,7 +93,7 @@
               </li>
               <li><i class="fas fa-lock"></i>{{'CHNAGEPASSWORD'|translate}}</li>
               <li><i class="fas fa-user-clock"></i>{{'SETUPNOTIFICATION'|translate}}</li>
-              <li><i class="fas fa-sign-out-alt"></i>{{'SIGNOUT'|translate}}</li>
+              <li (click)="signout()"><i class="fas fa-sign-out-alt"></i>{{'SIGNOUT'|translate}}</li>
             </ul>
           </div>
         </div>
@@ -200,19 +200,19 @@
                         </div>
                       </div>
                       <div class="col-sm-2" style="position: relative;top:20px;">
-                        <!-- <mat-icon *ngIf="openPDF==pv._id"
+                        <mat-icon *ngIf="pv.open" (click)="openReport(pv)"
                           style="height: 35px;width: 35px;font-size:35px;cursor: pointer;"
-                          class="mat-icon material-icons mat-icon-no-color">keyboard_arrow_right</mat-icon> -->
-                        <mat-icon 
+                          class="mat-icon material-icons mat-icon-no-color">keyboard_arrow_right</mat-icon>
+                        <mat-icon *ngIf="!pv.open" (click)="closeReport(pv)"
                           style="height: 35px;width: 35px;font-size:35px;cursor: pointer;"
                           class="mat-icon material-icons mat-icon-no-color">keyboard_arrow_down</mat-icon>
                       </div>
                     </div>
                   </div>
-                  <div style="background: #f0f0f0;padding: 10px;border: 1px solid #ccc;">
-                    <div style="border-right: 1px solid #ccc;width: 20%; display: inline-block;text-align: center;"
-                      *ngFor="let rpt of pv.patientreports">
-                      <i style="font-size: 48px;display: block;color: #3d61ca;" class="material-icons">
+                  <div *ngIf="!pv.open" style="background: #f0f0f0;padding: 10px;border: 1px solid #ccc;">
+                    <div  style="border-right: 1px solid #ccc;width: 20%; display: inline-block;text-align: center;"
+                      *ngFor="let rpt of pv.patientreports" >
+                      <i style="font-size: 34px;display: block;color: #3d61ca;" class="material-icons">
                         picture_as_pdf
                       </i>
                       <span>{{rpt.documentname}}</span>

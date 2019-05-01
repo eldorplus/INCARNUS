@@ -403,6 +403,7 @@ th.mat-header-cell {
   font-size: 12px;
   margin: 10px 15px 10px 5px !important;
   width: 150px;
+  padding: 10px !important;
 }
 // @media (min-width: 768px)
 // {
@@ -416,4 +417,7 @@ th.mat-header-cell {
 .s-nav-bar ul.nav.navbar{
   min-width: 510px;
   width: 100%;
+}
+.mat-select-value {
+  color: rgba(43, 43, 43, 0.87);
 }

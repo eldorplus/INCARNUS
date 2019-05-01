@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { SignupDialog, SigninDialog } from '../home/home.component';
 import { CancelAppoinmentDialog } from './cancel-appointment-popup';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-inner-layout',
   templateUrl: './inner-layout.component.html',
@@ -37,7 +38,7 @@ export class InnerLayoutComponent implements OnInit {
   openPDF: string = '';
   patientReports: any[] = [];
   constructor(
-    private _doctorService: DoctorService, public dialog: MatDialog, private translate: TranslateService
+    private _doctorService: DoctorService, public dialog: MatDialog, private translate: TranslateService,private router:Router
   ) {
     translate.setDefaultLang('en');
     translate.use('en');
@@ -130,6 +131,7 @@ export class InnerLayoutComponent implements OnInit {
     this._doctorService.getPatientVisits(id).subscribe(s => {
       this.patientvisits = s.patientvisits;
       this.patientvisits.forEach(element => {
+        element["open"]=false;
         element["patientreports"] = [];
         this._doctorService.getpatientreports(element._id).subscribe(s => {
           s.patientreports.forEach(r => {
@@ -241,17 +243,17 @@ export class InnerLayoutComponent implements OnInit {
 
 
       if ((age.years > 0) && (age.months > 0) && (age.days > 0))
-        ageString = age.years + yearString + ", " + age.months + monthString + ", and " + age.days + dayString + "";
+        ageString = age.years + yearString + ", " + age.months + monthString + ", " + age.days + dayString + "";
       else if ((age.years == 0) && (age.months == 0) && (age.days > 0))
         ageString = "" + age.days + dayString + "";
       else if ((age.years > 0) && (age.months == 0) && (age.days == 0))
         ageString = age.years + yearString + " Happy Birthday!!";
       else if ((age.years > 0) && (age.months > 0) && (age.days == 0))
-        ageString = age.years + yearString + " and " + age.months + monthString + " ";
+        ageString = age.years + yearString + " " + age.months + monthString + " ";
       else if ((age.years == 0) && (age.months > 0) && (age.days > 0))
-        ageString = age.months + monthString + " and " + age.days + dayString + "";
+        ageString = age.months + monthString + " " + age.days + dayString + "";
       else if ((age.years > 0) && (age.months == 0) && (age.days > 0))
-        ageString = age.years + yearString + " and " + age.days + dayString + " ";
+        ageString = age.years + yearString + " " + age.days + dayString + " ";
       else if ((age.years == 0) && (age.months > 0) && (age.days == 0))
         ageString = age.months + monthString + "";
       else ageString = "";
@@ -262,10 +264,19 @@ export class InnerLayoutComponent implements OnInit {
       return "";
   }
 
+  signout() {
 
+    localStorage.removeItem("extid");
+    localStorage.removeItem("loginId");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");  
+    this.router.navigate(['/', 'home']);
+  }
 
-
-
-
-
+  openReport(obj:any){
+    obj.open= false;
+  }
+  closeReport(obj:any){
+    obj.open= true;
+  }
 }

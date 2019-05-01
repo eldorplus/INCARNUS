@@ -79,7 +79,9 @@ export class HomeComponent implements OnInit {
   selectedSlotId: string = '';
   selectedDoctorId: string = '';
   selectedSlotInfo: any;
-
+  Department = new FormControl();
+  doctordepartments: any[] = [];
+  slotsData: any[] = [];
   constructor(public dialog: MatDialog,
     private _doctorService: DoctorService,
     private router: Router,
@@ -152,11 +154,74 @@ export class HomeComponent implements OnInit {
       );
   }
 
+  sampleData() {
+    let data: any = `{ "freeSlots": [
+      {
+        "appointmentscheduleuid": "5c23262e9f7ed577bf7c87fd",
+        "starttime": "2019-04-30T02:30:00.000Z",
+        "endtime": "2019-04-30T02:40:00.000Z",
+        "department": {
+          "_id": "569cb69f2d10b2d7eaf6fa5f",
+          "name": "General Medicine"
+        }
+      },
+      {
+        "appointmentscheduleuid": "5c23262e9f7ed577bf7c87fd",
+        "starttime": "2019-04-30T02:40:00.000Z",
+        "endtime": "2019-04-30T02:50:00.000Z",
+        "department": {
+          "_id": "569cb69f2d10b2d7eaf6fa5f",
+          "name": "General Medicine"
+        }
+      },
+      {
+        "appointmentscheduleuid": "5c23262e9f7ed577bf7c87fd",
+        "starttime": "2019-04-30T02:50:00.000Z",
+        "endtime": "2019-04-30T03:00:00.000Z",
+        "department": {
+          "_id": "569cb69f2d10b2d7eaf6fa5f",
+          "name": "General Medicine"
+        }
+      },
+      {
+        "appointmentscheduleuid": "5c23262e9f7ed577bf7c87fd",
+        "starttime": "2019-05-01T02:50:00.000Z",
+        "endtime": "2019-05-01T03:00:00.000Z",
+        "department": {
+          "_id": "569cb69f2d10b2d7eaf6fa5f",
+          "name": "General Medicine"
+        }
+      },
+      {
+        "appointmentscheduleuid": "5c23262e9f7ed577bf7c87fd",
+        "starttime": "2019-05-02T02:30:00.000Z",
+        "endtime": "2019-05-02T02:40:00.000Z",
+        "department": {
+          "_id": "569cb69f2d10b2d7eaf6fa5f",
+          "name": "General Medicine"
+        }
+      },
+      {
+        "appointmentscheduleuid": "5c23262e9f7ed577bf7c87fd",
+        "starttime": "2019-05-02T02:40:00.000Z",
+        "endtime": "2019-05-02T02:50:00.000Z",
+        "department": {
+          "_id": "569cb69f2d10b2d7eaf6fa5f",
+          "name": "General Medicine"
+        }
+      }
+     
+    ]}`
+
+
+    return JSON.parse(data);
+  }
+
   openDialog(obj): void {
     this.selectedSlotInfo = obj;
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '500px',
-      data: { selectedscheduleID: this.selectedscheduleID, selectedSlotInfo: this.selectedSlotInfo }
+      data: { selectedSlotInfo: this.selectedSlotInfo }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -186,80 +251,133 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  getavaillots() {
+    debugger;
+    let dept = this.Department.value;
+    this.appointmentSessionList = [];
+    if (dept) {
+      let data = this.availableFreelots.filter(f => f.department._id == dept);
+     
+      let obj: any[] = [];     
+      let appointmentsessions: appointmentsessions[] = [];
+      for (let index = 0; index < 8; index++) {
+        let currentDate = new Date();
+        let date = new Date(currentDate.setDate(new Date().getDate() + index))
+        let slots = data.filter(f => new Date(f.starttime).toDateString() == date.toDateString());
+        if (slots.length > 0) {
+          let o: appointmentsessions = {
+            date: date,
+            position: (index + 1),
+            morningtime: slots
+          }
+          appointmentsessions.push(o);
+        }
+      }
+
+      this.appointmentSessionList = appointmentsessions;
+
+    }
+  }
+  availableFreelots: any[] = [];
   appointmentSessionDetails(obj) {
     this._doctorService.getdoctorphoto(obj._id).subscribe(s => {
-      debugger;
+
       this.docimg = '';
       if (s.doctorimage && s.doctorimage.length > 0)
         this.docimg = s.doctorimage[0].doctorphoto;
 
     });
-    debugger;
+
     // this.router.navigateByUrl('/doctorsdetais');
     this.timetablehidden = false;
     // this.tabprofiledetails = false;
     this.doctorprodetails = false;
     this.doctordetailshidden = true;
     this.selecteddoctor = obj;
+    let date = new Date();
+    let orguid: any = '569794170946a3d0d588efe6',
+      careprovideruid: any = '5876feb1ef258a3b428f9202',
+      fromdate: any = new Date(),
+      todate: any = new Date(date.setDate(date.getDate() + 7)),
+      departmentuid: any = '569cb69f2d10b2d7eaf6fa5f';
 
-    this._doctorService.getappointmentsession(obj._id).subscribe(s => {
-      this.selectedDoctorId = obj._id;
-      console.log(s);
+    this._doctorService.getavailableslots(orguid, careprovideruid, fromdate, todate, departmentuid).subscribe(s => {
 
-      let appointment: any[] = s.appointmentsessions;
+      if (!s) {
+        let da = this.sampleData().freeSlots;
+        this.availableFreelots = da;
 
-      let morningtime: any[] = [];
-
-      appointment.forEach(element => {
-
-        element.slotdetails.forEach(slot => {
-          let loc = slot.location;
-          let i = 1;
-          slot.timings.forEach(time => {
-            if (new Date(time.starttime)) {
-              let sesstionstarttime = new Date(time.starttime);
-              let sesstionendtime = new Date(time.endtime);
-              let starttime = sesstionstarttime.getHours();
-              let slots = {
-                slotIndex: i,
-                slotId: slot._id,
-                slotName: loc + ' <br/>' + ((starttime < 10 ? "0" + starttime : starttime) + ':' + (sesstionstarttime.getMinutes() < 10 ? "0" + sesstionstarttime.getMinutes() : sesstionstarttime.getMinutes())) + '-' + ((sesstionendtime.getHours() < 10 ? "0" + sesstionendtime.getHours() : sesstionendtime.getHours()) + ":" + (sesstionendtime.getMinutes() < 10 ? "0" + sesstionendtime.getMinutes() : sesstionendtime.getMinutes())),
-                starttime: time.starttime,
-                endtime: time.endtime,
-                duration: time.duration,
-                maxappointments: time.maxappointments,
-                noofslots: time.noofslots,
-                sessionId: element._id
-              };
-              morningtime.push(slots);
-              i++;
-            }
-
-          });
+        var dept = da.map(m => m.department);
+        this.doctordepartments = [];
+        dept.forEach(element => {
+          if (this.doctordepartments.filter(f => f._id == element._id).length == 0)
+            this.doctordepartments.push(element);
         });
 
-      });
-
-      let currentDate = new Date();
-      let appointmentsessions: appointmentsessions[] = [];
-
-
-
-
-      for (let index = 0; index < 8; index++) {
-        let date = new Date(currentDate.setDate(new Date().getDate() + index))
-
-        let session: appointmentsessions = {
-          date: date,
-          position: (index + 1),
-          morningtime: morningtime,
-
-        }
-        appointmentsessions.push(session);
       }
-      this.appointmentSessionList = appointmentsessions;
-      console.log(appointmentsessions);
+      console.log(s);
     });
+
+
+
+    // this._doctorService.getappointmentsession(obj._id).subscribe(s => {
+    //   this.selectedDoctorId = obj._id;
+    //   console.log(s);
+
+    //   let appointment: any[] = s.appointmentsessions;
+
+    //   let morningtime: any[] = [];
+
+    //   appointment.forEach(element => {
+
+    //     element.slotdetails.forEach(slot => {
+    //       let loc = slot.location;
+    //       let i = 1;
+    //       slot.timings.forEach(time => {
+    //         if (new Date(time.starttime)) {
+    //           let sesstionstarttime = new Date(time.starttime);
+    //           let sesstionendtime = new Date(time.endtime);
+    //           let starttime = sesstionstarttime.getHours();
+    //           let slots = {
+    //             slotIndex: i,
+    //             slotId: slot._id,
+    //             slotName: loc + ' <br/>' + ((starttime < 10 ? "0" + starttime : starttime) + ':' + (sesstionstarttime.getMinutes() < 10 ? "0" + sesstionstarttime.getMinutes() : sesstionstarttime.getMinutes())) + '-' + ((sesstionendtime.getHours() < 10 ? "0" + sesstionendtime.getHours() : sesstionendtime.getHours()) + ":" + (sesstionendtime.getMinutes() < 10 ? "0" + sesstionendtime.getMinutes() : sesstionendtime.getMinutes())),
+    //             starttime: time.starttime,
+    //             endtime: time.endtime,
+    //             duration: time.duration,
+    //             maxappointments: time.maxappointments,
+    //             noofslots: time.noofslots,
+    //             sessionId: element._id
+    //           };
+    //           morningtime.push(slots);
+    //           i++;
+    //         }
+
+    //       });
+    //     });
+
+    //   });
+
+    //   let currentDate = new Date();
+    //   let appointmentsessions: appointmentsessions[] = [];
+
+
+
+
+    //   for (let index = 0; index < 8; index++) {
+    //     let date = new Date(currentDate.setDate(new Date().getDate() + index))
+
+    //     let session: appointmentsessions = {
+    //       date: date,
+    //       position: (index + 1),
+    //       morningtime: morningtime,
+
+    //     }
+    //     appointmentsessions.push(session);
+    //   }
+    //   this.appointmentSessionList = appointmentsessions;
+    //   console.log(appointmentsessions);
+    // });
   }
 
   filesToUpload: any[] = [];
@@ -345,24 +463,7 @@ export class HomeComponent implements OnInit {
     this._doctorService.doctorsearch(formData.name, formData.location, formData.speciality).subscribe(s => {
       this.doctorsList = s.doctors;
       console.log(s);
-    });
-
-    // const doctorsearch = JSON.parse(localStorage.getItem('doctorlocation'));
-    // console.log(this.doctorForm.value.location);
-    // if (this.doctorForm.value.location === doctorsearch) {
-    //   this.doctordetailshidden = false;
-    // }
-    // // this._doctorService.update_doctor(this.doctorForm.value.location)
-
-    // //     .pipe(first())
-    // //     .subscribe(
-    // //         (res: Response) => {
-    // //         console.log(res);
-    // //           this.searchres = res ;
-    // //         },
-    // //         error => {
-    // //             alert(error);
-    // //         });
+    });  
 
   }
   signin(): void {
@@ -503,13 +604,29 @@ export class SignupDialog {
   Submit() {
     debugger;
     if (this.verificationCode == this.verifyCode.value) {
-      this._doctorService.createPatient(this.fname.value, this.lname.value, this.mname.value, this.gender.value, this.title.value, this.dob.value, this.phone.value, this.email.value).subscribe(s => {
-        let name = "password12";
-        //let name = this.fname.value + '' + this.lname.value;
-        //if (name.length > 4) {
-        //  name = name.substring(0, 3);
-        //}
-        //name = name + new Date(this.dob.value).getFullYear();
+
+
+      let params: any = {
+        address: { address: "" },
+        ageString: "",
+        contact: { countrycodeuid: null, mobilephone: this.phone.value, homephone: this.phone.value, emailid: this.email.value },
+        dateofbirth: this.dob.value,
+        firstname: this.fname.value,
+        genderuid: this.gender.value,
+        ignoreDuplicatePatient: true,
+        isdobestimated: false,
+        ispreregistration: true,
+        lastname: this.lname.value,
+        middlename: this.mname.value,
+        titleuid: this.title.value
+
+      };
+      debugger;
+
+
+      this._doctorService.createPatient(params).subscribe(s => {
+        let name = "test123";
+
         debugger;
         this._doctorService.ChangePassword(this.phone.value, name).subscribe(
           s1 => { }
@@ -549,10 +666,32 @@ export class DialogOverviewExampleDialog {
 
     dialogRef.afterClosed().subscribe(result => {
       debugger;
-      if (result.type == 1) {
+      if (result.type && result.type == 1) {
         //  let start = this.data.selectedSlotInfo.startTime.toDateString() + "T" + this.data.selectedSlotInfo.startTime.getHours()+":"+this.data.selectedSlotInfo.startTime.getMinutes+":00";
         //  let end = this.data.selectedSlotInfo.endTime.toDateString() + "T" + this.data.selectedSlotInfo.endTime.getHours()+":"+this.data.selectedSlotInfo.endTime.getMinutes+":00";
-        this._doctorService.addbooking(this.data.selectedscheduleID, this.data.selectedSlotInfo.startTime, this.data.selectedSlotInfo.endTime, result.patientid, this.data.selectedSlotInfo.slotNo).subscribe(s => {
+        let param: any = {
+          allDay: false,
+          backgroundcolor: "Cyan",
+          comments: "",
+          description: "AS DFD",
+          end: this.data.selectedSlotInfo.endtime,
+          freetextremindermsg: "",
+          isactive: true,
+          modeuid: null,
+          patientuid: result.patientid,
+          priorityuid: "56cb4f5013ab1595bae1d89d",
+          reasonuid: null,
+          scheduleuid: this.data.selectedSlotInfo.appointmentscheduleuid,
+          servicetypeuid: null,
+          smstextuid: null,
+          start: this.data.selectedSlotInfo.starttime,
+          statusreason: "",
+          statusuid: "56f91847b5c3bf9ec2dc7ff1",
+          title: "AS DFD ( TMP19000166 ) ",
+
+        };
+        debugger;
+        this._doctorService.addbooking(param).subscribe(s => {
 
 
           this.snackBar.open("Appointment is registered successfully. We will message you on the confirmation of appointment.", "", {
@@ -578,7 +717,29 @@ export class DialogOverviewExampleDialog {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result.type == 2) {
-        this._doctorService.addbooking(this.data.selectedscheduleID, this.data.selectedSlotInfo.startTime, this.data.selectedSlotInfo.endTime, result.patientid, this.data.selectedSlotInfo.slotNo).subscribe(s => {
+        debugger;
+        let param: any = {
+          allDay: false,
+          backgroundcolor: "Cyan",
+          comments: "",
+          description: "AS DFD",
+          end: this.data.selectedSlotInfo.endtime,
+          freetextremindermsg: "",
+          isactive: true,
+          modeuid: null,
+          patientuid: result.patientid,
+          priorityuid: "56cb4f5013ab1595bae1d89d",
+          reasonuid: null,
+          scheduleuid: this.data.selectedSlotInfo.appointmentscheduleuid,
+          servicetypeuid: null,
+          smstextuid: null,
+          start: this.data.selectedSlotInfo.starttime,
+          statusreason: "",
+          statusuid: "56f91847b5c3bf9ec2dc7ff1",
+          title: "AS DFD ( TMP19000166 ) ",
+
+        }
+        this._doctorService.addbooking(param).subscribe(s => {
           alert("Appointment is registered successfully. We will message you on the confirmation of appointment.");
         }, e => { });
       }
@@ -593,3 +754,4 @@ export class appointmentsessions {
   date: Date;
   morningtime: any[];
 }
+
