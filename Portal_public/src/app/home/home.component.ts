@@ -602,10 +602,8 @@ export class SignupDialog {
     });
   }
   Submit() {
-    debugger;
+    
     if (this.verificationCode == this.verifyCode.value) {
-
-
       let params: any = {
         address: { address: "" },
         ageString: "",
@@ -619,15 +617,11 @@ export class SignupDialog {
         lastname: this.lname.value,
         middlename: this.mname.value,
         titleuid: this.title.value
-
-      };
-      debugger;
+      };    
 
 
       this._doctorService.createPatient(params).subscribe(s => {
-        let name = "test123";
-
-        debugger;
+        let name = "test123";        
         this._doctorService.ChangePassword(this.phone.value, name).subscribe(
           s1 => { }
         );

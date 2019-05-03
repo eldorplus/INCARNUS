@@ -81,7 +81,25 @@ export class PatientDetailsComponent implements OnInit {
     Save() {
         if (this.frmPatientInfo.valid) {
             let values = this.frmPatientInfo.value;
-            this._doctorService.createPatient(values.FirstName, values.LastName, values.MiddleName, values.Gender, values.Title, values.DOB, values.WorkPhone, values.EmailId).subscribe(
+
+
+            let params: any = {
+                address: { address: "" },
+                ageString: "",
+                contact: { countrycodeuid: null, mobilephone:  values.WorkPhone, homephone:  values.WorkPhone, emailid: values.EmailId },
+                dateofbirth: values.DOB,
+                firstname: values.FirstName,
+                genderuid: values.Gender,
+                ignoreDuplicatePatient: true,
+                isdobestimated: false,
+                ispreregistration: true,
+                lastname: values.LastName,
+                middlename: values.MiddleName,
+                titleuid: values.Title
+              };    
+
+
+            this._doctorService.createPatient(params).subscribe(
                 s => {
                     this.snackBar.open("Patient Information Updated Successfully.", "", {
                         duration: 2000,
