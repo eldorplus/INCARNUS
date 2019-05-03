@@ -295,11 +295,11 @@ export class HomeComponent implements OnInit {
     this.doctordetailshidden = true;
     this.selecteddoctor = obj;
     let date = new Date();
-    let orguid: any = '569794170946a3d0d588efe6',
-      careprovideruid: any = '5876feb1ef258a3b428f9202',
+    let orguid: any = obj.orguid , // '569794170946a3d0d588efe6',
+      careprovideruid: any = obj.externalid , // '5876feb1ef258a3b428f9202',
       fromdate: any = new Date(),
       todate: any = new Date(date.setDate(date.getDate() + 7)),
-      departmentuid: any = '569cb69f2d10b2d7eaf6fa5f';
+      departmentuid: any = '' ; //'569cb69f2d10b2d7eaf6fa5f';
 
     this._doctorService.getavailableslots(orguid, careprovideruid, fromdate, todate, departmentuid).subscribe(s => {
 

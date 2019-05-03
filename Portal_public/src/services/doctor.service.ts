@@ -67,7 +67,8 @@ export class DoctorService {
   }
 
   getLocationList() {
-    return this.http.post<any>('http://localhost:8080/getdropdownlist', { 'domaincode': 'LOCATION' });
+    //return this.http.post<any>('http://localhost:8080/getdropdownlist', { 'domaincode': 'LOCATION' });
+    return this.http.post<any>('http://localhost:8080/getorganisationlist', { });
   }
 
   getTitleList() {
@@ -124,12 +125,12 @@ export class DoctorService {
 
   //  To add booking 
   createPatient(params: any) {
-    return this.http.post<any>('http://52.220.168.61:8090/framework/patient/create', params);
+    return this.http.post<any>('http://52.220.168.61:8090/patientportal/patient/create', params);
   }
 
   //  To add booking 
   addbooking(param: any) {
-    return this.http.post<any>('http://52.220.168.61:8090/framework/appointmentschedule/addbooking', param);
+    return this.http.post<any>('http://52.220.168.61:8090/patientportal/appointmentschedule/addbooking', param);
   }
 
 
@@ -137,8 +138,8 @@ export class DoctorService {
     return this.http.post<any>('http://localhost:8080/getdropdownlist', { 'domaincode': 'TEST1' });
   }
 
-  cancelAppointment(scheduleid: any, reasonid: string, comment: string) {
-    return this.http.post<any>('http://localhost:8080/appointment/bookappointment/cancelbooking', { 'selectedscheduleuids': scheduleid, 'cancelreasonuid': reasonid, 'cancelcomments': comment });
+  cancelAppointment(scheduleid: any, slotid: any, reasonid: string, comment: string) {
+    return this.http.post<any>('http://52.220.168.61:8090/appointment/bookappointment/cancelbooking', { 'scheduleuid': scheduleid, '_id' : slotid, 'cancelreasonuid': reasonid, 'cancelcomments': comment });
   }
 
   //  Patient Visit & Reports functionality
@@ -170,7 +171,7 @@ export class DoctorService {
 
   // To get future appointment information for the selected patient id & status 
   getfutureappointmentsforpatient(patientid: any) {
-    return this.http.post<any>('http://52.220.168.61:8090/framework/appointmentschedule/getfutureappointmentforpatient', { 'patientuid': patientid, 'curdate': new Date() });
+    return this.http.post<any>('http://52.220.168.61:8090/patientportal/appointmentschedule/getfutureappointmentforpatient', { 'patientuid': patientid, 'curdate': new Date() });
   }
 
   //  To get report information for the selected patient visit id 

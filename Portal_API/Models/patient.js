@@ -30,8 +30,6 @@ var PatientContactSchema = new Schema({
 
 
 var PatientSchema = new Schema({
-    /** externalid {string} has to be unique */
-    externalid: {type :String, index: true},       
     /** mrn {String} - medical record number to be generated uniquely for the patient usine sequence number generation */
     mrn: { type: String},
     /** internalmrn {String} - same as mrn without - . Used for Searching purposes. */

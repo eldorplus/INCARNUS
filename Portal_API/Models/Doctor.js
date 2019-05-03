@@ -28,8 +28,6 @@ var DoctorContactSchema = new Schema({
 });
 
 var DoctorSchema = new Schema({
-    /** externalid {string} has to be unique */
-    externalid: {type :String, index: true},       
     /** Code {string} has to be unique */
     code: { type: String, required: true, index: true },
     /** Name {string} Defines the Full Name Of user*/

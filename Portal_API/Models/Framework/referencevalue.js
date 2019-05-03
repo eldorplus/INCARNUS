@@ -14,8 +14,6 @@ var Schema = mongoose.Schema;
   var ReferenceValueSchema = new Schema({
         valuecode : {type : String, required:true, index: true},
         valuedescription : {type :String, index: true},
-        /** externalid {string} has to be unique */
-        externalid: {type :String, index: true},       
         locallanguagedesc : String,
         aliasname : String,
         isdefault : Boolean,

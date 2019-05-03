@@ -17,7 +17,7 @@ export class CancelAppoinmentDialog {
     }
     constructor(
         public dialogRef: MatDialogRef<CancelAppoinmentDialog>,
-        @Inject(MAT_DIALOG_DATA) public data: any, private _doctorService: DoctorService) {
+        @Inject(MAT_DIALOG_DATA) public data: any,  private _doctorService: DoctorService) {
         
         this.getReason();
     }
@@ -28,9 +28,10 @@ export class CancelAppoinmentDialog {
         );
     }
     cancelAppointment() {
-        let id = this.data.id;
+        let id = this.data.scheduleuid; // schedule id
+        let slot = this.data._id; // slot id
         if (this.cancelReason.valid)
-            this._doctorService.cancelAppointment(id, this.cancelReason.value, this.cancelComment.value).subscribe(s => {
+            this._doctorService.cancelAppointment(id, slot, this.cancelReason.value, this.cancelComment.value).subscribe(s => {
                 alert('Appointment Cancelled Successfully.');
                 this.dialogRef.close();
             });

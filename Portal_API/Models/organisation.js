@@ -35,8 +35,6 @@ var OrganisationSchema = new Schema({
     uid: { type: Number },
     /** Code {string} has to be unique */
     code: { type: String, required: true, index: true },
-    /** externalid {string} has to be unique */
-    externalid: { type: String },
 
     /** Name {string} defines the  name given to the organisation*/
     name: { type: String, required: true, index: true },

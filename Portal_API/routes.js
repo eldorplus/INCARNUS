@@ -26,6 +26,9 @@ module.exports = function(app) {
     var doctor = require('./appointment/doctor');
     app.get('/appointment/doctor/test', doctor.test);
     //  drop down list
+    app.post('/getorganisationlist', doctor.getorganisationlist);
+
+    //  drop down list
     app.post('/getdropdownlist', doctor.getdropdownlist);
     //  Doctor search
     app.post('/appointment/doctor/search', doctor.search);

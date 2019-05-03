@@ -13,8 +13,8 @@ module.exports = exports = function auditinfo(schema, options) {
         modifiedat: { type: Date, required: true , index : true},
         statusflag: { type: String, required: true, index: true },
         orguid: { type: Schema.ObjectId, ref: 'Organisation', required: true, index: true },
-        /** externaluid {String} - any external table unique uid */
-        externaluid: String
+        /** externalid {String} - any external table unique uid */
+        externalid: String
     });
 
 };

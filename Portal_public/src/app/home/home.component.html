@@ -64,40 +64,42 @@
           <div class="col-sm-6 doctor_search white-dropdown">
             <div class="row p_lr_10">
               <div class="col-sm-6">
-                <div class="row">
-                  <div class="col-sm-1 p_0">
-                    <i class="material-icons search_icons">star_border</i>
-                  </div>
-                  <div class="col-sm-11 p_0">
-                    <mat-form-field class="col-sm-12 p_0 margin-left-5">
-                      <mat-select formControlName="speciality" placeholder="Select speciality" color="white">
-                        <mat-option value> {{'SELECTSPECIALITY' | translate}} </mat-option>
-                        <mat-option *ngFor="let sl of specialtylist" [value]="sl._id">
-                          {{sl.valuedescription}}
-                        </mat-option>
-                      </mat-select>
+                  <div class="row">
+                      <div class="col-sm-1 p_0">
+                        <i class="material-icons search_icons">location_on</i>
+                      </div>
+                      <div class="col-sm-11 p_0">
+                        <mat-form-field class="col-sm-12 p_0 margin-left-5">
+                          <mat-select placeholder="Select Location" formControlName="location" color="white">
+                            <mat-option [value]="''"> {{'SELECTLOCATION' | translate}} </mat-option>
+                            <mat-option *ngFor="let sl of locationlist" [value]="sl._id">
+                              {{sl.name}}
+                            </mat-option>
+                          </mat-select>
+    
+                        </mat-form-field>
+                      </div>
+                    </div>
 
-                    </mat-form-field>
-                  </div>
-                </div>
+               
               </div>
               <div class="col-sm-6">
-                <div class="row">
-                  <div class="col-sm-1 p_0">
-                    <i class="material-icons search_icons">location_on</i>
-                  </div>
-                  <div class="col-sm-11 p_0">
-                    <mat-form-field class="col-sm-12 p_0 margin-left-5">
-                      <mat-select placeholder="Select Location" formControlName="location" color="white">
-                        <mat-option [value]="''"> {{'SELECTLOCATION' | translate}} </mat-option>
-                        <mat-option *ngFor="let sl of locationlist" [value]="sl.valuecode">
-                          {{sl.valuedescription}}
-                        </mat-option>
-                      </mat-select>
-
-                    </mat-form-field>
-                  </div>
-                </div>
+                  <div class="row">
+                      <div class="col-sm-1 p_0">
+                        <i class="material-icons search_icons">star_border</i>
+                      </div>
+                      <div class="col-sm-11 p_0">
+                        <mat-form-field class="col-sm-12 p_0 margin-left-5">
+                          <mat-select formControlName="speciality" placeholder="Select speciality" color="white">
+                            <mat-option value> {{'SELECTSPECIALITY' | translate}} </mat-option>
+                            <mat-option *ngFor="let sl of specialtylist" [value]="sl._id">
+                              {{sl.valuedescription}}
+                            </mat-option>
+                          </mat-select>
+    
+                        </mat-form-field>
+                      </div>
+                    </div>
 
               </div>
 
@@ -152,7 +154,7 @@
             <div class="content">
               <div class="front">
                 <div class="profile_bg"></div>
-                <div class="profile">
+                <div class="profile"> 
                   <img src="assets/images/{{pro}}">
                 </div>
                 <div class="appointment-box">

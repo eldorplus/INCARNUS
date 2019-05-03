@@ -1,6 +1,7 @@
 var Doctor = require('../models/Doctor'); // refre the Model Exported Object schema
 var DoctorImage = require('../models/Doctorimage'); // refre the Model Exported Object schema
 var ReferenceValue = require('../models/framework/ReferenceValue'); // refre the Model Exported Object schema
+var organization = require('../models/organisation'); // refre the Model Exported Object schema
 
 var mongoose = require('mongoose');
 //var winston = require('winston');
@@ -16,6 +17,30 @@ var getBetweenRegx = exports.getBetweenRegx = function(str) {
 
 
 exports.list = function(req, res) {};
+
+// To get organization list 
+exports.getorganisationlist = function(req, res) {
+    var query = organization.find({
+        statusflag: 'A'
+    })
+    query.select('uid externalid name _id ');
+    query.lean().exec(function(err, docs) {
+        if (!err) {
+            res.status(200).json({
+                dropdownlist: docs
+            });
+        } else {
+           /* winston.error(err, {
+                timestamp: Date.now(),
+                pid: process.pid,
+                url: req.url
+            }); */
+            res.status(500).json({
+                error: 'ERRORS.RECORDNOTFOUND'
+            });
+        }
+    });
+};
 
 // To get speciality list 
 exports.getdropdownlist = function(req, res) {
@@ -52,8 +77,8 @@ function search(req, res, callback) {
     res.setHeader('Access-Control-Allow-Credentials', true);*/
 
     var query = Doctor.find({
-        statusflag: 'A', 
-        orguid: req.session.orguid
+        statusflag: 'A' 
+        //orguid: req.session.orguid
     })
 
     console.log('name : ' + req.body.name);
@@ -63,6 +88,14 @@ function search(req, res, callback) {
     /*if (req.body.code != null && req.body.code.length > 0)
         query.where('code').equals(!!req.body.isstrictcode ? req.body.code : { '$regex': getBetweenRegx(req.body.code) });
     */
+   if (req.body.location != null && req.body.location.length > 0) {
+    query.where({
+        orguid: {
+            $in: req.body.location
+            }
+    });
+    }
+
    if (req.body.specialtyuid != null && req.body.specialtyuid.length > 0) {
         query.where({
             specialtyuid: {
@@ -91,16 +124,16 @@ function search(req, res, callback) {
         });
     }
 
-    if (req.body.location != null && req.body.location.length > 0) {
+    /*if (req.body.location != null && req.body.location.length > 0) {
         query.where({
             location: {
                 '$regex': getBetweenRegx(req.body.location)
                 }
         });
-    }
+    } */
    
  
-    query.select('printname genderuid titleuid primarydept location qualification specialtyuid _id ');
+    query.select('printname genderuid titleuid primarydept location qualification specialtyuid _id externalid orguid');
     query.populate('genderuid', 'valuedescription');
     query.populate('titleuid', 'valuedescription');
     query.populate('specialtyuid', 'valuedescription');
