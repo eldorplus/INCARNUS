@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DoctorService } from '../../services/doctor.service';
 import { first } from 'rxjs/operators';
 import { MatDialog, MatSnackBar } from '@angular/material';
@@ -10,7 +10,8 @@ import { debug } from 'util';
 @Component({
     selector: 'app-patient-detail',
     templateUrl: './patient-details.component.html',
-    styleUrls: ['./patient-details.component.scss']
+    styleUrls: ['./patient-details.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class PatientDetailsComponent implements OnInit {
     patientCard: any;
@@ -58,6 +59,7 @@ export class PatientDetailsComponent implements OnInit {
             Country: [PatienData.address ? PatienData.address.country : '', Validators.required],
             ZipCode: [PatienData.address ? PatienData.address.zipcode : '', Validators.required]
         });
+        this.frmPatientInfo.disable();
     }
 
     doGetPatient(id) {
@@ -86,7 +88,7 @@ export class PatientDetailsComponent implements OnInit {
             let params: any = {
                 address: { address: "" },
                 ageString: "",
-                contact: { countrycodeuid: null, mobilephone:  values.WorkPhone, homephone:  values.WorkPhone, emailid: values.EmailId },
+                contact: { countrycodeuid: null, mobilephone: values.WorkPhone, homephone: values.WorkPhone, emailid: values.EmailId },
                 dateofbirth: values.DOB,
                 firstname: values.FirstName,
                 genderuid: values.Gender,
@@ -96,7 +98,7 @@ export class PatientDetailsComponent implements OnInit {
                 lastname: values.LastName,
                 middlename: values.MiddleName,
                 titleuid: values.Title
-              };    
+            };
 
 
             this._doctorService.createPatient(params).subscribe(

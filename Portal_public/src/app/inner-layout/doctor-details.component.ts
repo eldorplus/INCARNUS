@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DoctorService } from '../../services/doctor.service';
 import { first } from 'rxjs/operators';
 import { MatDialog, MatSnackBar } from '@angular/material';
@@ -10,7 +10,8 @@ import { debug } from 'util';
 @Component({
     selector: 'app-doctor-detail',
     templateUrl: './doctor-details.component.html',
-    styleUrls: ['./patient-details.component.scss']
+    styleUrls: ['./patient-details.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class DoctorDetailsComponent implements OnInit {
     doctorId: string = '';
@@ -43,10 +44,10 @@ export class DoctorDetailsComponent implements OnInit {
         obj.doctor.contact.weburl = this.frmDoctorInfo.value.Urls;
         debugger;
         this._doctorService.savedoctorinformation(obj.doctor).subscribe(
-            s => { 
+            s => {
                 this.snackBar.open("Doctor Information Updated Successfully.", "", {
                     duration: 2000,
-                  });
+                });
             },
             e => { }
         );
@@ -81,5 +82,9 @@ export class DoctorDetailsComponent implements OnInit {
 
             }
         );
+    }
+
+    getAge(date: any) {
+        return this._doctorService.getAge(date);
     }
 }

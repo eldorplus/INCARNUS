@@ -27,5 +27,6 @@
     "CHNAGEPASSWORD": "Change Password",
     "SETUPNOTIFICATION": "Setup Notification",
     "SIGNOUT": "Sign Out",
-    "SELECTDEPARTMENT":"Select Department"
+    "SELECTDEPARTMENT":"Select Department",
+    "NOAPPOINTMENTFOUND":"No Appointment Found !"
 }

@@ -46,8 +46,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'date', 'morningtime'];
-  dataSource = ELEMENT_DATA;
+
   doctorprofiehidden: any;
   doctorForm: FormGroup;
   public email: number;
@@ -72,15 +71,14 @@ export class HomeComponent implements OnInit {
   availabletimehidden = true;
   doctorprodetails = true;
   tabprofiledetails = true;
-  appointmentSessionList: appointmentsessions[] = [];
   appointmentSlots: any;
   selectedscheduleID: string = ""; //"5c831b3c48929107b469de16";
   selectedSessionId: string = '';
   selectedSlotId: string = '';
   selectedDoctorId: string = '';
   selectedSlotInfo: any;
-  Department = new FormControl();
-  doctordepartments: any[] = [];
+
+
   slotsData: any[] = [];
   constructor(public dialog: MatDialog,
     private _doctorService: DoctorService,
@@ -133,6 +131,7 @@ export class HomeComponent implements OnInit {
   selecteddoctor: any = null;
   loginUsername: string = "";
   loginUserPhoto: string = "";
+  openAppointmentPopup: boolean = false;
   ngOnInit() {
     this.formInitialize();
     this.getspecialtylist();
@@ -154,81 +153,12 @@ export class HomeComponent implements OnInit {
       );
   }
 
-  sampleData() {
-    let data: any = `{ "freeSlots": [
-      {
-        "appointmentscheduleuid": "5c23262e9f7ed577bf7c87fd",
-        "starttime": "2019-04-30T02:30:00.000Z",
-        "endtime": "2019-04-30T02:40:00.000Z",
-        "department": {
-          "_id": "569cb69f2d10b2d7eaf6fa5f",
-          "name": "General Medicine"
-        }
-      },
-      {
-        "appointmentscheduleuid": "5c23262e9f7ed577bf7c87fd",
-        "starttime": "2019-04-30T02:40:00.000Z",
-        "endtime": "2019-04-30T02:50:00.000Z",
-        "department": {
-          "_id": "569cb69f2d10b2d7eaf6fa5f",
-          "name": "General Medicine"
-        }
-      },
-      {
-        "appointmentscheduleuid": "5c23262e9f7ed577bf7c87fd",
-        "starttime": "2019-04-30T02:50:00.000Z",
-        "endtime": "2019-04-30T03:00:00.000Z",
-        "department": {
-          "_id": "569cb69f2d10b2d7eaf6fa5f",
-          "name": "General Medicine"
-        }
-      },
-      {
-        "appointmentscheduleuid": "5c23262e9f7ed577bf7c87fd",
-        "starttime": "2019-05-01T02:50:00.000Z",
-        "endtime": "2019-05-01T03:00:00.000Z",
-        "department": {
-          "_id": "569cb69f2d10b2d7eaf6fa5f",
-          "name": "General Medicine"
-        }
-      },
-      {
-        "appointmentscheduleuid": "5c23262e9f7ed577bf7c87fd",
-        "starttime": "2019-05-02T02:30:00.000Z",
-        "endtime": "2019-05-02T02:40:00.000Z",
-        "department": {
-          "_id": "569cb69f2d10b2d7eaf6fa5f",
-          "name": "General Medicine"
-        }
-      },
-      {
-        "appointmentscheduleuid": "5c23262e9f7ed577bf7c87fd",
-        "starttime": "2019-05-02T02:40:00.000Z",
-        "endtime": "2019-05-02T02:50:00.000Z",
-        "department": {
-          "_id": "569cb69f2d10b2d7eaf6fa5f",
-          "name": "General Medicine"
-        }
-      }
-     
-    ]}`
-
-
-    return JSON.parse(data);
+  appointmentSessionDetails(obj: any) {
+    this.openAppointmentPopup = false;  
+    this.selectedDoctorId = obj._id;
+    this.openAppointmentPopup = true;
   }
 
-  openDialog(obj): void {
-    this.selectedSlotInfo = obj;
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '500px',
-      data: { selectedSlotInfo: this.selectedSlotInfo }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.patientout = result;
-    });
-  }
 
   formInitialize() {
     this.doctorForm = this.formBuilder.group({
@@ -251,140 +181,14 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  getavaillots() {
-    debugger;
-    let dept = this.Department.value;
-    this.appointmentSessionList = [];
-    if (dept) {
-      let data = this.availableFreelots.filter(f => f.department._id == dept);
-     
-      let obj: any[] = [];     
-      let appointmentsessions: appointmentsessions[] = [];
-      for (let index = 0; index < 8; index++) {
-        let currentDate = new Date();
-        let date = new Date(currentDate.setDate(new Date().getDate() + index))
-        let slots = data.filter(f => new Date(f.starttime).toDateString() == date.toDateString());
-        if (slots.length > 0) {
-          let o: appointmentsessions = {
-            date: date,
-            position: (index + 1),
-            morningtime: slots
-          }
-          appointmentsessions.push(o);
-        }
-      }
-
-      this.appointmentSessionList = appointmentsessions;
-
-    }
-  }
-  availableFreelots: any[] = [];
-  appointmentSessionDetails(obj) {
-    this._doctorService.getdoctorphoto(obj._id).subscribe(s => {
-
-      this.docimg = '';
-      if (s.doctorimage && s.doctorimage.length > 0)
-        this.docimg = s.doctorimage[0].doctorphoto;
-
-    });
-
-    // this.router.navigateByUrl('/doctorsdetais');
-    this.timetablehidden = false;
-    // this.tabprofiledetails = false;
-    this.doctorprodetails = false;
-    this.doctordetailshidden = true;
-    this.selecteddoctor = obj;
-    let date = new Date();
-    let orguid: any = obj.orguid , // '569794170946a3d0d588efe6',
-      careprovideruid: any = obj.externalid , // '5876feb1ef258a3b428f9202',
-      fromdate: any = new Date(),
-      todate: any = new Date(date.setDate(date.getDate() + 7)),
-      departmentuid: any = '' ; //'569cb69f2d10b2d7eaf6fa5f';
-
-    this._doctorService.getavailableslots(orguid, careprovideruid, fromdate, todate, departmentuid).subscribe(s => {
-
-      if (!s) {
-        let da = this.sampleData().freeSlots;
-        this.availableFreelots = da;
-
-        var dept = da.map(m => m.department);
-        this.doctordepartments = [];
-        dept.forEach(element => {
-          if (this.doctordepartments.filter(f => f._id == element._id).length == 0)
-            this.doctordepartments.push(element);
-        });
-
-      }
-      console.log(s);
-    });
 
 
-
-    // this._doctorService.getappointmentsession(obj._id).subscribe(s => {
-    //   this.selectedDoctorId = obj._id;
-    //   console.log(s);
-
-    //   let appointment: any[] = s.appointmentsessions;
-
-    //   let morningtime: any[] = [];
-
-    //   appointment.forEach(element => {
-
-    //     element.slotdetails.forEach(slot => {
-    //       let loc = slot.location;
-    //       let i = 1;
-    //       slot.timings.forEach(time => {
-    //         if (new Date(time.starttime)) {
-    //           let sesstionstarttime = new Date(time.starttime);
-    //           let sesstionendtime = new Date(time.endtime);
-    //           let starttime = sesstionstarttime.getHours();
-    //           let slots = {
-    //             slotIndex: i,
-    //             slotId: slot._id,
-    //             slotName: loc + ' <br/>' + ((starttime < 10 ? "0" + starttime : starttime) + ':' + (sesstionstarttime.getMinutes() < 10 ? "0" + sesstionstarttime.getMinutes() : sesstionstarttime.getMinutes())) + '-' + ((sesstionendtime.getHours() < 10 ? "0" + sesstionendtime.getHours() : sesstionendtime.getHours()) + ":" + (sesstionendtime.getMinutes() < 10 ? "0" + sesstionendtime.getMinutes() : sesstionendtime.getMinutes())),
-    //             starttime: time.starttime,
-    //             endtime: time.endtime,
-    //             duration: time.duration,
-    //             maxappointments: time.maxappointments,
-    //             noofslots: time.noofslots,
-    //             sessionId: element._id
-    //           };
-    //           morningtime.push(slots);
-    //           i++;
-    //         }
-
-    //       });
-    //     });
-
-    //   });
-
-    //   let currentDate = new Date();
-    //   let appointmentsessions: appointmentsessions[] = [];
-
-
-
-
-    //   for (let index = 0; index < 8; index++) {
-    //     let date = new Date(currentDate.setDate(new Date().getDate() + index))
-
-    //     let session: appointmentsessions = {
-    //       date: date,
-    //       position: (index + 1),
-    //       morningtime: morningtime,
-
-    //     }
-    //     appointmentsessions.push(session);
-    //   }
-    //   this.appointmentSessionList = appointmentsessions;
-    //   console.log(appointmentsessions);
-    // });
-  }
 
   filesToUpload: any[] = [];
   fileChangeEvent(fileInput: any) {
     this.filesToUpload = <Array<File>>fileInput.target.files;
   }
-  docimg: string = "";
+
   upload() {
     const formData: any = new FormData();
     const files: Array<File> = this.filesToUpload;
@@ -398,9 +202,6 @@ export class HomeComponent implements OnInit {
       s => { },
       e => { }
     );
-    // this.http.post('http://localhost:3003/upload', formData)
-    //     .map(files => files.json())
-    //     .subscribe(files => console.log('files', files))
   }
 
   availabletime(slots: any, AppointmentDate: Date) {
@@ -457,13 +258,13 @@ export class HomeComponent implements OnInit {
 
   selectedloaction: string;
   searchclick() {
-
+    this.openAppointmentPopup = false;
     let formData = this.doctorForm.value;
 
     this._doctorService.doctorsearch(formData.name, formData.location, formData.speciality).subscribe(s => {
       this.doctorsList = s.doctors;
       console.log(s);
-    });  
+    });
 
   }
   signin(): void {
@@ -602,7 +403,7 @@ export class SignupDialog {
     });
   }
   Submit() {
-    
+
     if (this.verificationCode == this.verifyCode.value) {
       let params: any = {
         address: { address: "" },
@@ -617,11 +418,11 @@ export class SignupDialog {
         lastname: this.lname.value,
         middlename: this.mname.value,
         titleuid: this.title.value
-      };    
+      };
 
 
       this._doctorService.createPatient(params).subscribe(s => {
-        let name = "test123";        
+        let name = "test123";
         this._doctorService.ChangePassword(this.phone.value, name).subscribe(
           s1 => { }
         );
@@ -660,7 +461,7 @@ export class DialogOverviewExampleDialog {
 
     dialogRef.afterClosed().subscribe(result => {
       debugger;
-      if (result.type && result.type == 1) {
+      if (result && result.type && result.type == 1) {
         //  let start = this.data.selectedSlotInfo.startTime.toDateString() + "T" + this.data.selectedSlotInfo.startTime.getHours()+":"+this.data.selectedSlotInfo.startTime.getMinutes+":00";
         //  let end = this.data.selectedSlotInfo.endTime.toDateString() + "T" + this.data.selectedSlotInfo.endTime.getHours()+":"+this.data.selectedSlotInfo.endTime.getMinutes+":00";
         let param: any = {
@@ -710,7 +511,7 @@ export class DialogOverviewExampleDialog {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.type == 2) {
+      if (result && result.type &&result.type == 2) {
         debugger;
         let param: any = {
           allDay: false,

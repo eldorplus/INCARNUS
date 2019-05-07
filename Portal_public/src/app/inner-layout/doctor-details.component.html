@@ -58,47 +58,8 @@
                                 <p><i class="material-icons hospitalicon"> local_hospital
                                     </i><b class="hospitalname">{{doctorData.doctor.companyname}}, </b> <span
                                         style="color: #517da2;"
-                                        class="hospitalname">{{doctorData.doctor.location}}</span></p>                            
-                                <div>
-                                    <h3 class="titles"><i class="fas fa-user"></i>Personality</h3>
-                                </div>
-                                <div class="scontent">
-                                    <span class="slabel">DOB</span>:<span
-                                        class="svalue">{{doctorData.doctor.dateofbirth | date:'dd-MM-yyyy'}}</span> 
-                                    <span class="slabel">Gender</span>:<span
-                                        class="svalue">{{doctorGender}}</span><br />
-                                    <span class="slabel">Nationality</span>:<span
-                                        class="svalue">{{doctorData.doctor.nationality}}</span><br />
-                                    <span class="slabel">Qualification</span>:<span
-                                        class="svalue">{{doctorData.doctor.qualification}}</span>
-                                </div>
-                                <div>
-                                    <h3 class="titles"><i class="fas fa-address-card"></i>Address</h3>
-                                </div>
-                                <div class="scontent" *ngIf="doctorData.doctor.address">
-                                    <span class="slabel">Address</span>:<span
-                                        class="svalue">{{doctorData.doctor.address.address}}</span><br />
-                                    <span class="slabel">Area/City</span>:<span
-                                        class="svalue">{{doctorData.doctor.address.area}} /
-                                        {{doctorData.doctor.address.city}}</span><br />
-                                    <span class="slabel">State/Country</span>:<span
-                                        class="svalue">{{doctorData.doctor.address.state}} /
-                                        {{doctorData.doctor.address.country}} -
-                                        {{doctorData.doctor.address.zipcode}}</span>
-                                </div>
-                                <div>
-                                    <h3 class="titles"><i class="fas fa-address-book"></i>Contact</h3>
-                                </div>
-                                <div class="scontent" *ngIf="doctorData.doctor.contact">
-                                    <span class="slabel">Emailid</span>:<span
-                                        class="svalue">{{doctorData.doctor.contact.emailid}}</span><br />
-                                    <span class="slabel">MobileNo</span>:<span
-                                        class="svalue">{{doctorData.doctor.contact.mobilephone}}</span><br />
-                                    <span class="slabel">WorkPhone</span>:<span
-                                        class="svalue">{{doctorData.doctor.contact.workphone}}</span><br />
-                                    <span class="slabel">WebSite Url</span>:<span
-                                        class="svalue">{{doctorData.doctor.contact.weburl}}</span>
-                                </div>
+                                        class="hospitalname">{{doctorData.doctor.location}}</span></p>
+
                             </div>
                             <div>
                             </div>
@@ -107,35 +68,81 @@
                 </div>
                 <div class="col-sm-9">
 
-                    <form *ngIf="frmDoctorInfo" [formGroup]="frmDoctorInfo">
-                        <mat-card>
+                    <div class="col-sm-12">
+                        <mat-card class="doc-box doctor-info-card-1">
                             <div>
-                                <h3 style="font-size: 19px;" class="formheading">Comments</h3>
+                                <h3 class="titles"><i class="fas fa-user"></i>Personality</h3>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <mat-form-field>
-                                        <textarea rows="10" matInput formControlName="Description"
-                                            placeholder="Description"></textarea>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-12">
-                                    <mat-form-field>
-                                        <textarea rows="10" matInput formControlName="Urls"
-                                            placeholder="Reference Urls"></textarea>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div style="float:right;">
-                                        <button [disabled]="frmDoctorInfo.invalid" (click)="Save()" class="col-sm-3 p_0"
-                                            mat-raised-button color="primary">Update</button>
-                                    </div>
-                                </div>
+                            <div class="scontent">
+                                <span class="span-question">DOB</span>:<span
+                                    class="span-answer">{{doctorData.doctor.dateofbirth | date:'dd-MM-yyyy'}} - {{getAge(doctorData.doctor.dateofbirth)}}</span><br />
+                                <span class="span-question">Gender</span>:<span
+                                    class="span-answer">{{doctorGender}}</span><br />
+                                <span class="span-question">Nationality</span>:<span
+                                    class="span-answer">{{doctorData.doctor.nationality}}</span><br />
+                                <span class="span-question">Qualification</span>:<span
+                                    class="span-answer">{{doctorData.doctor.qualification}}</span>
                             </div>
                         </mat-card>
-                    </form>
+                    </div>
+                    <div class="col-sm-12">
+                        <mat-card class="doc-box doctor-info-card-2">
+                            <div>
+                                <h3 class="titles"><i class="fas fa-address-card"></i>Address</h3>
+                            </div>
+                            <div class="scontent" *ngIf="doctorData.doctor.address">
+                                <span class="span-question">Address</span>:<span
+                                    class="span-answer">{{doctorData.doctor.address.address}}</span><br />
+                                <span class="span-question">Area / City</span>:<span
+                                    class="span-answer">{{doctorData.doctor.address.area}} /
+                                    {{doctorData.doctor.address.city}}</span><br />
+                                <span class="span-question">State / Country</span>:<span
+                                    class="span-answer">{{doctorData.doctor.address.state}} /
+                                    {{doctorData.doctor.address.country}} -
+                                    {{doctorData.doctor.address.zipcode}}</span>
+                            </div>
+                        </mat-card>
+                    </div>
+
+
+                    <div class="col-sm-12">
+                        <mat-card class="doc-box doctor-info-card-3">
+                            <div>
+                                <h3 class="titles"><i class="fas fa-address-book"></i>Contact</h3>
+                            </div>
+                            <div class="scontent" *ngIf="doctorData.doctor.contact">
+                                <span class="span-question">Emailid</span>:<span
+                                    class="span-answer">{{doctorData.doctor.contact.emailid}}</span><br />
+                                <span class="span-question">MobileNo</span>:<span
+                                    class="span-answer">{{doctorData.doctor.contact.mobilephone}}</span><br />
+                                <span class="span-question">WorkPhone</span>:<span
+                                    class="span-answer">{{doctorData.doctor.contact.workphone}}</span><br />
+                                <span class="span-question">WebSite Url</span>:<span
+                                    class="span-answer">{{doctorData.doctor.contact.weburl}}</span>
+                            </div>
+                        </mat-card>
+                    </div>
+                    <div class="col-sm-12">
+                        <mat-card class="doc-box doctor-info-card-4">
+                            <div>
+                                <h3 class="titles"><i class="fa fa-comments" aria-hidden="true"></i>Comments</h3>
+                            </div>
+                            <div class="scontent" *ngIf="doctorData.doctor.contact">
+                                <span class="span-question">Description</span>:<span
+                                    class="span-answer">{{doctorData.doctor.description}}</span><br />
+                                <span class="span-question">Reference Urls</span>:<span
+                                    class="span-answer">{{doctorData.doctor.contact.weburl}}</span>
+                            </div>
+                        </mat-card>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div style="float:right;">
+                                <button routerLink="/home"  class="col-sm-3 p_0"
+                                    mat-raised-button color="primary">Back</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

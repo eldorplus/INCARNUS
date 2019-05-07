@@ -60,6 +60,7 @@ import { CancelAppoinmentDialog } from './inner-layout/cancel-appointment-popup'
 import { PatientDetailsComponent } from './inner-layout/patient-details.component';
 import { DoctorDetailsComponent } from './inner-layout/doctor-details.component';
 import { AppTranslationModule } from './app.translation.module';
+import { DoctorAppointmentComponent } from './home/doctor-appointment.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { AppTranslationModule } from './app.translation.module';
     NewpatientComponent, HomeComponent, SigninDialog,CancelAppoinmentDialog,
     SignupDialog,
     InnerLayoutComponent,
-    PatientDetailsComponent,DialogOverviewExampleDialog,DoctorDetailsComponent
+    PatientDetailsComponent,DialogOverviewExampleDialog,DoctorDetailsComponent,
+    DoctorAppointmentComponent
   ],
   imports: [
     FormsModule,

@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { InnerLayoutComponent } from './inner-layout/inner-layout.component';
 import { PatientDetailsComponent } from './inner-layout/patient-details.component';
 import { DoctorDetailsComponent } from './inner-layout/doctor-details.component';
+import { DoctorAppointmentComponent } from './home/doctor-appointment.component';
 
 const routes: Routes = [
   { path: 'doctors', component: DoctorsComponent },
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'patient/:id', component: PatientDetailsComponent },
   { path: 'doctor/:id', component: DoctorDetailsComponent },
-  
+  { path: 'appointment/:id', component: DoctorAppointmentComponent }
 ];
 
 @NgModule({

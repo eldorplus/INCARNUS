@@ -74,3 +74,61 @@
     top: -25px;
     position: relative;
 }
+.patientDetailsForm .mat-select-disabled .mat-select-value {
+    color: rgba(0, 0, 0, 0.76);
+}
+.patientDetailsForm .mat-input-element:disabled {
+    color: rgba(0, 0, 0, 0.76);
+}
+
+.patientDetailsForm {
+    .pad-left-0{
+    padding-left: 0;
+}
+.pad-right-0{
+    padding-right: 0;
+}
+}
+.patientDetailsForm .doc-box{
+    border-radius: 0;
+    margin-bottom: 20px;   
+    &.doctor-info-card-1{
+        border-left: 10px solid #61a048;
+        background: #6bb14f1c;
+    }
+    &.doctor-info-card-2{
+        background: #044fa014;
+        border-left: 10px solid #044fa0;
+       
+    }
+    &.doctor-info-card-3{
+        background: #468ca712;
+        border-left: 10px solid #468ca7;
+    }
+    &.doctor-info-card-4{
+        background: #ef6f5226;
+        border-left: 10px solid #ef6f52;
+    }
+    i{
+        float: right;
+        color: #044fa06b;
+        font-size: 40px;
+    }
+    h3{
+        color: #002d5f;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    .span-question{
+        color: #248494;
+        font-size: 14px;  
+        line-height: 24px;
+        padding: 0 15px;
+    }
+    .span-answer{
+        padding: 0 15px;
+        color: #60615e;
+        font-size: 13px;
+        font-weight: bolder;
+    }
+}

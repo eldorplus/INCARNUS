@@ -21,15 +21,11 @@ export class InnerLayoutComponent implements OnInit {
   public reportid: any;
   public patientreport: any;
   public visitlist: any;
-
   public profile: any;
-
   public useruid: any;
   public visiterid: any;
   public patientvisitdetail: any;
-
   public patientvisitinfo = [];
-
   public patientCard: any = null;
   selectedPatient: string = '-- Select Patient --';
   selectedPatientId: string = '';
@@ -38,25 +34,14 @@ export class InnerLayoutComponent implements OnInit {
   openPDF: string = '';
   patientReports: any[] = [];
   constructor(
-    private _doctorService: DoctorService, public dialog: MatDialog, private translate: TranslateService,private router:Router
+    private _doctorService: DoctorService, public dialog: MatDialog, private translate: TranslateService, private router: Router
   ) {
     translate.setDefaultLang('en');
     translate.use('en');
   }
 
   ngOnInit() {
-
-
     this.signin();
-
-
-
-    //  To get Patient information for the Login ID 
-    //this.useruid = "111111111";
-    // if (userid)
-    //   this.useruid = userid;
-
-
   }
   signin(): void {
     let userid = localStorage.getItem("userId");
@@ -131,7 +116,7 @@ export class InnerLayoutComponent implements OnInit {
     this._doctorService.getPatientVisits(id).subscribe(s => {
       this.patientvisits = s.patientvisits;
       this.patientvisits.forEach(element => {
-        element["open"]=false;
+        element["open"] = false;
         element["patientreports"] = [];
         this._doctorService.getpatientreports(element._id).subscribe(s => {
           s.patientreports.forEach(r => {
@@ -156,10 +141,7 @@ export class InnerLayoutComponent implements OnInit {
 
   downloadReport(id) {
     this._doctorService.getreportdetail(id).subscribe(s => {
-
       let result = s.PatientReport.reportdocument.data;
-
-
       var byteArray = new Uint8Array(result);
       var blob = new Blob([byteArray], { type: 'application/pdf' });
       if (window.navigator && window.navigator.msSaveOrOpenBlob) {
@@ -183,100 +165,25 @@ export class InnerLayoutComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-
-      // this.animal = result;
     });
   }
 
-
-  getAge(dateString) {
-    if (dateString && new Date(dateString)) {
-      var now = new Date();
-      var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      var yearNow = now.getFullYear();
-      var monthNow = now.getMonth();
-      var dateNow = now.getDate();
-      var dob = new Date(dateString);
-      var yearDob = dob.getFullYear();
-      var monthDob = dob.getMonth();
-      var dateDob = dob.getDate();
-      let age: any = {};
-      var ageString = "";
-      var yearString = "";
-      var monthString = "";
-      var dayString = "";
-      let yearAge = 0;
-
-      yearAge = yearNow - yearDob;
-
-      if (monthNow >= monthDob)
-        var monthAge = monthNow - monthDob;
-      else {
-        yearAge--;
-        var monthAge = 12 + monthNow - monthDob;
-      }
-
-      if (dateNow >= dateDob)
-        var dateAge = dateNow - dateDob;
-      else {
-        monthAge--;
-        var dateAge = 31 + dateNow - dateDob;
-
-        if (monthAge < 0) {
-          monthAge = 11;
-          yearAge--;
-        }
-      }
-
-      age = {
-        years: yearAge,
-        months: monthAge,
-        days: dateAge
-      };
-
-      if (age.years > 1) yearString = " Y";
-      else yearString = " year";
-      if (age.months > 1) monthString = " M";
-      else monthString = " month";
-      if (age.days > 1) dayString = " D";
-      else dayString = " day";
-
-
-      if ((age.years > 0) && (age.months > 0) && (age.days > 0))
-        ageString = age.years + yearString + ", " + age.months + monthString + ", " + age.days + dayString + "";
-      else if ((age.years == 0) && (age.months == 0) && (age.days > 0))
-        ageString = "" + age.days + dayString + "";
-      else if ((age.years > 0) && (age.months == 0) && (age.days == 0))
-        ageString = age.years + yearString + " Happy Birthday!!";
-      else if ((age.years > 0) && (age.months > 0) && (age.days == 0))
-        ageString = age.years + yearString + " " + age.months + monthString + " ";
-      else if ((age.years == 0) && (age.months > 0) && (age.days > 0))
-        ageString = age.months + monthString + " " + age.days + dayString + "";
-      else if ((age.years > 0) && (age.months == 0) && (age.days > 0))
-        ageString = age.years + yearString + " " + age.days + dayString + " ";
-      else if ((age.years == 0) && (age.months > 0) && (age.days == 0))
-        ageString = age.months + monthString + "";
-      else ageString = "";
-
-      return ageString;
-    }
-    else
-      return "";
-  }
-
   signout() {
-
     localStorage.removeItem("extid");
     localStorage.removeItem("loginId");
     localStorage.removeItem("userId");
-    localStorage.removeItem("userName");  
+    localStorage.removeItem("userName");
     this.router.navigate(['/', 'home']);
   }
 
-  openReport(obj:any){
-    obj.open= false;
+  openReport(obj: any) {
+    obj.open = false;
   }
-  closeReport(obj:any){
-    obj.open= true;
+  closeReport(obj: any) {
+    obj.open = true;
+  }
+
+  getAge(date: any) {
+    return this._doctorService.getAge(date);
   }
 }
