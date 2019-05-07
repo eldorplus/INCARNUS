@@ -1,0 +1,94 @@
+<!-- ======================== Doctor Profile ========================== -->
+
+<section *ngIf="selecteddoctor" class="mrg_t_40">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <mat-card>
+                    <div class="profile" style="display: inline-block;">
+                        <img *ngIf="docimg==''" style="width: 80px;height: 80px;" class="doctor_profile_infoimg"
+                            src="assets/images/doctor_img.jpg">
+                        <img *ngIf="docimg!=''" style="width: 80px;height: 80px;" class="doctor_profile_infoimg"
+                            src='data:image/jpg;base64,{{docimg}}' />
+                    </div>
+                    <div style="display: inline-block;margin-left: 10px;">
+                        <h3 style="font-size:18px;">{{selecteddoctor.printname}}</h3>
+
+                        <p class="doctor_short_info">
+                            {{selecteddoctor.qualification}},                          
+                            <span>{{selecteddoctor.primarydept}}</span>,
+                            <span>{{selecteddoctor.location}}</span>
+                        </p>
+                        <mat-form-field class="col-sm-12 p_0 margin-left-5">
+                            <mat-select (selectionChange)="getavaillots()"
+                                placeholder="{{'SELECTDEPARTMENT' | translate}}" [formControl]="Department"
+                                color="white">
+                                <mat-option [value]="''"> {{'SELECTDEPARTMENT' | translate}} </mat-option>
+                                <mat-option *ngFor="let sl of doctordepartments" [value]="sl._id">
+                                    {{sl.name}}
+                                </mat-option>
+                            </mat-select>
+
+                        </mat-form-field>
+                    </div>
+
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ======================== Doctor Profile ========================== -->
+<!-- ======================== Doctor Time Table Code Start Here ========================== -->
+<section>
+    <div class="container">
+        <div class="patient_portal_table" *ngIf="appointmentSessionList.length > 0">
+            <table mat-table [dataSource]="appointmentSessionList" class="mat-elevation-z8">
+
+                <!--- Note that these columns can be defined in any order.
+                       The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                </ng-container>
+
+
+
+                <!-- date Column -->
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Date </th>
+                    <td mat-cell *matCellDef="let element" class="title_txt">
+                        {{element.date | date:'EEE , dd MMM yyyy'}} </td>
+                </ng-container>
+
+                <!-- morningtime Column -->
+                <ng-container matColumnDef="morningtime">
+                    <th mat-header-cell *matHeaderCellDef> {{'TIMESLOTS' | translate}} </th>
+                    <td mat-cell *matCellDef="let element">
+                        <!-- <h3 class="place"> {{element.place}}</h3> -->
+                        <span *ngFor="let v of element.morningtime">
+                            <button (click)="openDialog(v,element.date)" class="timing_btn" mat-raised-button>
+                                <!-- <span [innerHTML]="v.slotName"></span> -->
+                                {{v.starttime | date:'shortTime'}} - {{v.endtime | date:'shortTime'}}
+                            </button>
+                        </span>
+
+                    </td>
+                </ng-container>
+
+                <!-- eveningtime Column -->
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        <div *ngIf="appointmentSessionList.length == 0">
+            <mat-card>
+                {{'NOAPPOINTMENTFOUND' | translate}}
+            </mat-card>
+        </div>
+    </div>
+</section>
+<!-- ======================== Doctor Time Table Code End Here ========================== -->
