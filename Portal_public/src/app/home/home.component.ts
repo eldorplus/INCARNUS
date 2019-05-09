@@ -420,9 +420,12 @@ export class SignupDialog {
         titleuid: this.title.value
       };
 
-      let head: any = {  headers : {'orguid' : '569794170946a3d0d588efe6' , 'useruid' : '56b3023fa0a0cfa62210a1aa' } };
+      //  Test data
+      //let head: any = {  headers : {'orguid' : '569794170946a3d0d588efe6' , 'useruid' : '56b3023fa0a0cfa62210a1aa' } };
+      let orguid: any = '569794170946a3d0d588efe6';
+      let useruid: any = '56b3023fa0a0cfa62210a1aa' ;
 
-      this._doctorService.createPatient(params, head).subscribe(s => {
+      this._doctorService.createPatient(params, orguid, useruid).subscribe(s => {
         //let name = "test123";
         //this._doctorService.ChangePassword(this.phone.value, name).subscribe(
         //  s1 => { }
@@ -501,7 +504,6 @@ export class DialogOverviewExampleDialog {
 
 
 
-          // alert("Appointment is registered successfully. We will message you on the confirmation of appointment.");
         }, e => { });
       }
 
@@ -544,7 +546,10 @@ export class DialogOverviewExampleDialog {
         let head: any = {  headers : {'orguid' : this.data.selectedSlotInfo.orguid , 'useruid' : this.data.selectedSlotInfo.careprovideruid } };
 
         this._doctorService.addbooking(param, head).subscribe(s => {
-          alert("Appointment is registered successfully. We will message you on the confirmation of appointment.");
+          this.snackBar.open("Appointment is registered successfully. We will message you on the confirmation of appointment.", "", {
+            duration: 2000,
+          });
+
         }, e => { });
       }
     });

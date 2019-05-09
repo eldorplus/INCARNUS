@@ -102,11 +102,17 @@ module.exports = function(app) {
     app.post('/report/patientvisit/savereportdetail', report.savereportdetail);
 
     //Interface
-    //  save doctor information
-    app.post('/interface/savedoctorinformation', doctor.savedoctorinformation);
+    var datainterface = require('./appointment/datainterface');
+    //  save organization
+    app.post('/interface/saveorganisation', datainterface.saveorganisation);
+    //  save reference value 
+    app.post('/interface/savereferencevalue', datainterface.saveReferenceValue);
+    //  save doctor
+    app.post('/interface/savedoctor', datainterface.saveDoctor);
     //  save doctor photo 
     app.post('/interface/savedoctorphoto', doctor.savedoctorphoto);
-
+    //  save patient 
+    app.post('/interface/savepatient', datainterface.savePatient);
     //  save patient information
     app.post('/interface/receivepatientinformation', patient.create);
     //  save patient photo 
@@ -119,14 +125,14 @@ module.exports = function(app) {
     app.post('/interface/getpatientdetails', patient.getpatientdetails);
 
     //  save patient visits
-    app.post('/interface/savepatientvisits', report.savepatientvisitinformation);
+    app.post('/interface/addpatientvisit', report.savepatientvisitinformation);
     //  save patient reports
-    app.post('/interface/savepatientreports', report.savereportdetail);
+    app.post('/interface/addpatientreport', report.savereportdetail);
 
     //  To get appointment schedule information for the appointment session 
-    app.post('/interface/getAppointmentSchedulesforSession', appointment.getAppointmentSchedule);
+    //app.post('/interface/getAppointmentSchedulesforSession', appointment.getAppointmentSchedule);
     //  To get appointment schedule information based on the date 
-    app.post('/interface/getappointmentscheduledetails', appointment.getappointmentscheduledetails);
+    //app.post('/interface/getappointmentscheduledetails', appointment.getappointmentscheduledetails);
 
 
 /*

@@ -185,9 +185,9 @@ exports.savepatientvisitinformation = function(req, res) {
     var newVisit = new PatientVisit();
     newVisit._id = req.body._id;
     newVisit.patientuid = req.body.patientuid;
-    newVisit.entypeuid = req.body.entypeuid;
+    //newVisit.entypeuid = req.body.entypeuid;
     newVisit.visitid = req.body.visitid;
-    newVisit.visitstatusuid = req.body.visitstatusuid;
+    //newVisit.visitstatusuid = req.body.visitstatusuid;
     newVisit.startdate = req.body.startdate;
     newVisit.enddate = req.body.enddate;
 
@@ -197,10 +197,10 @@ exports.savepatientvisitinformation = function(req, res) {
     newVisit.visitcareproviders.startdate = req.body.startdate;
     newVisit.visitcareproviders.clinic = req.body.clinic;
     newVisit.visitcareproviders.enddate = req.body.enddate;
-    newVisit.visitcareproviders.outcomeuid = req.body.outcomeuid;
-    newVisit.visitcareproviders.statusuid = req.body.statusuid;
-    newVisit.visitcareproviders.outcomeuid = req.body.outcomeuid;
-    newVisit.visitcareproviders.entypeuid = req.body.entypeuid;
+    //newVisit.visitcareproviders.outcomeuid = req.body.outcomeuid;
+    //newVisit.visitcareproviders.statusuid = req.body.statusuid;
+    //newVisit.visitcareproviders.outcomeuid = req.body.outcomeuid;
+    //newVisit.visitcareproviders.entypeuid = req.body.entypeuid;
     newVisit.visitcareproviders.comments = req.body.comments;
 
     newVisit.createdby = req.session.useruid;

@@ -24,6 +24,9 @@ var getBetweenRegx = exports.getBetweenRegx = function(str) {
 //  Organization
 
 function populateOrganisationDataFromRequest(req, newOrganisation) {
+    if (req.body.keepsameid == 1) {
+        newOrganisation._id = req.body.externalid;
+    }
     newOrganisation.code = req.body.code.toUpperCase() ;
     newOrganisation.externalid = req.body.externalid;
     newOrganisation.name = req.body.name;
@@ -120,7 +123,9 @@ exports.saveorganisation = function(req, res) {
 //  Reference Value
 
 function populateReferenceValueFromRequest(req, newRefVal) {
-    newRefVal._id = req.body.externalid;
+    if (req.body.keepsameid == 1) {
+        newRefVal._id = req.body.externalid;
+    }
     newRefVal.valuecode = req.body.valuecode ;
     newRefVal.externalid = req.body.externalid;
     newRefVal.valuedescription = req.body.valuedescription;
@@ -195,6 +200,9 @@ exports.saveReferenceValue = function(req, res) {
 //  Doctor
 
 function populateDoctorDataFromRequest(req, newDoctor) {
+    if (req.body.keepsameid == 1) {
+        newDoctor._id = req.body.externalid;
+    }
     newDoctor.externalid = req.body.externalid;
     newDoctor.code = req.body.code;
     newDoctor.name = req.body.name;
@@ -342,6 +350,10 @@ exports.savedoctorphoto = function(req, res) {
 //  Patient
 
 function populatePatientDataFromRequest(req, newPatient) {
+    if (req.body.keepsameid == 1) {
+        newPatient._id = req.body.externalid;
+    }
+
     newPatient.externalid = req.body.externalid;
     newPatient.mrn = req.body.mrn;
     newPatient.internalmrn = req.body.internalmrn;
