@@ -35,7 +35,7 @@ exports.checkloginpassword = function(req, res) {
                     if (bres == true) {
                         req.session.useruid = usr.loginid;
                         req.session.username = usr.firstname + ' ' + usr.middlename + ' ' + usr.lastname;
-                        res.status(200).json({ useruid: usr._id , externalid: usr.externalid });
+                        res.status(200).json({ useruid: usr });
                     } 
                     else {
                         res.status(401).json({ error: 'ERRORS.INVALIDLOGINPWD' });

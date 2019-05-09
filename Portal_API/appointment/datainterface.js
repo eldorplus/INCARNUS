@@ -120,6 +120,7 @@ exports.saveorganisation = function(req, res) {
 //  Reference Value
 
 function populateReferenceValueFromRequest(req, newRefVal) {
+    newRefVal._id = req.body.externalid;
     newRefVal.valuecode = req.body.valuecode ;
     newRefVal.externalid = req.body.externalid;
     newRefVal.valuedescription = req.body.valuedescription;
@@ -468,4 +469,5 @@ exports.savepatientphoto = function(req, res) {
         }
     });
 };
+
 

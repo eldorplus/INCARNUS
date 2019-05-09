@@ -28,10 +28,12 @@ export class CancelAppoinmentDialog {
         );
     }
     cancelAppointment() {
-        let id = this.data.scheduleuid; // schedule id
-        let slot = this.data._id; // slot id
+        let id = this.data.schid; // schedule id
+        let slot = this.data.slotid; // slot id
+        let orgid = this.data.orgid;
+        let useruid = this.data.useruid;
         if (this.cancelReason.valid)
-            this._doctorService.cancelAppointment(id, slot, this.cancelReason.value, this.cancelComment.value).subscribe(s => {
+            this._doctorService.cancelAppointment(id, slot, this.cancelReason.value, this.cancelComment.value,orgid, useruid).subscribe(s => {
                 alert('Appointment Cancelled Successfully.');
                 this.dialogRef.close();
             });

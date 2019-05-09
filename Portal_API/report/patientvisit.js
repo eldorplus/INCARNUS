@@ -63,12 +63,12 @@ exports.getvisitsforpatient = function(req, res) {
         orguid: req.session.orguid
     });
     query.where('patientuid').equals(req.body.id);
-    query.select('patientuid visitid visitstatusuid startdate visitcareproviders entypeuid ');
+    query.select('patientuid visitid startdate visitcareproviders ');
     query.populate('visitcareproviders.department', 'name');
     query.populate('visitcareproviders.careprovideruid', 'printname userimageuid');
-    query.populate('visitcareproviders.visittypeuid', 'valuedescription');
-    query.populate('visitcareproviders.statusuid', 'valuedescription');
-    query.populate('entypeuid', 'valuecode valuedescription relatedvalue');
+    //query.populate('visitcareproviders.visittypeuid', 'valuedescription');
+    //query.populate('visitcareproviders.statusuid', 'valuedescription');
+    //query.populate('entypeuid', 'valuecode valuedescription relatedvalue');
     query.sort({ startdate: 'desc' });
 
     query.lean().exec(function(err, docs) {

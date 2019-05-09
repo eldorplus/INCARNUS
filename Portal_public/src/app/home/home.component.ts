@@ -309,9 +309,9 @@ export class SigninDialog {
           debugger;
           localStorage.setItem("userId", this.mobileNo.value);
           localStorage.setItem("userName", this.mobileNo.value);
-          localStorage.setItem("loginId", s.useruid);
-          localStorage.setItem("extid", s.externalid);
-          this.dialogRef.close({ type: 1, patientid: s.useruid, userid: this.mobileNo.value, loginid: s.useruid });
+          localStorage.setItem("loginId", s.useruid._id);
+          localStorage.setItem("extid", s.useruid.externalid);
+          this.dialogRef.close({ type: 1, patientid: s.useruid.externalid, userid: this.mobileNo.value, loginid: s.useruid._id });
 
           //this.router.navigateByUrl('/innerlayout');
         },
@@ -354,7 +354,7 @@ export class SignupDialog {
   email = new FormControl('', [Validators.email]);
   fname = new FormControl('', [Validators.required]);
   lname = new FormControl('', [Validators.required]);
-  mname = new FormControl('');
+  //mname = new FormControl('');
   title = new FormControl('', [Validators.required]);
   gender = new FormControl('', [Validators.required]);
   phone = new FormControl('', [Validators.required]);
@@ -416,21 +416,24 @@ export class SignupDialog {
         isdobestimated: false,
         ispreregistration: true,
         lastname: this.lname.value,
-        middlename: this.mname.value,
+        middlename: '',
         titleuid: this.title.value
       };
 
+      let head: any = {  headers : {'orguid' : '569794170946a3d0d588efe6' , 'useruid' : '56b3023fa0a0cfa62210a1aa' } };
 
-      this._doctorService.createPatient(params).subscribe(s => {
-        let name = "test123";
-        this._doctorService.ChangePassword(this.phone.value, name).subscribe(
-          s1 => { }
-        );
-        this.dialogRef.close({ type: 2, patientid: s.patient.uid });
+      this._doctorService.createPatient(params, head).subscribe(s => {
+        //let name = "test123";
+        //this._doctorService.ChangePassword(this.phone.value, name).subscribe(
+        //  s1 => { }
+        //);
+        // CHECK This
+        let id = s.patient.uid;
+        this.dialogRef.close({ type: 2, patientid: id });
       });
     }
     else {
-      alert("Incorrect Verification Code. Please enter the code received in sms.");
+      alert("Incorrect Verification Code. Please enter the code received in sms");
     }
   }
 }
@@ -468,25 +471,28 @@ export class DialogOverviewExampleDialog {
           allDay: false,
           backgroundcolor: "Cyan",
           comments: "",
-          description: "AS DFD",
+          description: "",
           end: this.data.selectedSlotInfo.endtime,
           freetextremindermsg: "",
           isactive: true,
           modeuid: null,
           patientuid: result.patientid,
-          priorityuid: "56cb4f5013ab1595bae1d89d",
+          priorityuid: "", // 56cb4f5013ab1595bae1d89d
           reasonuid: null,
           scheduleuid: this.data.selectedSlotInfo.appointmentscheduleuid,
           servicetypeuid: null,
           smstextuid: null,
           start: this.data.selectedSlotInfo.starttime,
           statusreason: "",
-          statusuid: "56f91847b5c3bf9ec2dc7ff1",
-          title: "AS DFD ( TMP19000166 ) ",
+          statusuid: "", // 56f91847b5c3bf9ec2dc7ff1
+          title: "", // AS DFD ( TMP19000166 )
 
         };
+
+        let head: any = {  headers : {'orguid' : this.data.selectedSlotInfo.orguid , 'useruid' : this.data.selectedSlotInfo.careprovideruid } };
+
         debugger;
-        this._doctorService.addbooking(param).subscribe(s => {
+        this._doctorService.addbooking(param, head).subscribe(s => {
 
 
           this.snackBar.open("Appointment is registered successfully. We will message you on the confirmation of appointment.", "", {
@@ -517,24 +523,27 @@ export class DialogOverviewExampleDialog {
           allDay: false,
           backgroundcolor: "Cyan",
           comments: "",
-          description: "AS DFD",
+          description: "", // AS DFD
           end: this.data.selectedSlotInfo.endtime,
           freetextremindermsg: "",
           isactive: true,
           modeuid: null,
           patientuid: result.patientid,
-          priorityuid: "56cb4f5013ab1595bae1d89d",
+          priorityuid: "", // 56cb4f5013ab1595bae1d89d
           reasonuid: null,
           scheduleuid: this.data.selectedSlotInfo.appointmentscheduleuid,
           servicetypeuid: null,
           smstextuid: null,
           start: this.data.selectedSlotInfo.starttime,
           statusreason: "",
-          statusuid: "56f91847b5c3bf9ec2dc7ff1",
-          title: "AS DFD ( TMP19000166 ) ",
+          statusuid: "", // 56f91847b5c3bf9ec2dc7ff1
+          title: "", // AS DFD ( TMP19000166 ) 
 
         }
-        this._doctorService.addbooking(param).subscribe(s => {
+
+        let head: any = {  headers : {'orguid' : this.data.selectedSlotInfo.orguid , 'useruid' : this.data.selectedSlotInfo.careprovideruid } };
+
+        this._doctorService.addbooking(param, head).subscribe(s => {
           alert("Appointment is registered successfully. We will message you on the confirmation of appointment.");
         }, e => { });
       }

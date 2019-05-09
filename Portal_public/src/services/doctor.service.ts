@@ -124,13 +124,13 @@ export class DoctorService {
   }
 
   //  To add booking 
-  createPatient(params: any) {
-    return this.http.post<any>('http://52.220.168.61:8090/patientportal/patient/create', params);
+  createPatient(param: any, head: any ) {
+    return this.http.post<any>('http://52.220.168.61:8090/patientportal/patient/create', param, head);
   }
 
   //  To add booking 
-  addbooking(param: any) {
-    return this.http.post<any>('http://52.220.168.61:8090/patientportal/appointmentschedule/addbooking', param);
+  addbooking(param: any, head: any) {
+    return this.http.post<any>('http://52.220.168.61:8090/patientportal/appointmentschedule/addbooking', param, head);
   }
 
 
@@ -138,8 +138,8 @@ export class DoctorService {
     return this.http.post<any>('http://localhost:8080/getdropdownlist', { 'domaincode': 'TEST1' });
   }
 
-  cancelAppointment(scheduleid: any, slotid: any, reasonid: string, comment: string) {
-    return this.http.post<any>('http://52.220.168.61:8090/appointment/bookappointment/cancelbooking', { 'scheduleuid': scheduleid, '_id' : slotid, 'cancelreasonuid': reasonid, 'cancelcomments': comment });
+  cancelAppointment(scheduleid: any, slotid: any, reasonid: string, comment: string, orguid: any, useruid: any) {
+    return this.http.post<any>('http://52.220.168.61:8090/patientportal/appointmentschedule/cancelbooking', { 'scheduleuid': scheduleid, '_id' : slotid, 'cancelreasonuid': reasonid, 'cancelcomments': comment } , { headers : {'orguid' : orguid , 'useruid' : useruid }});
   }
 
   //  Patient Visit & Reports functionality
@@ -186,9 +186,9 @@ export class DoctorService {
 
 
 
-  // To get Report details for the report id 
+  // To get available slots for the doctor 
   getavailableslots(orguid: any, careprovideruid: any, fromdate: any, todate: any, departmentuid: any) {
-    return this.http.post<any>('http://52.220.168.61:8090/patientportal/appointmentschedule/getavaliableslots', { 'orguid': orguid, 'careprovideruid': careprovideruid, 'fromdate': fromdate, 'todate': todate, 'departmentuid': departmentuid });
+    return this.http.post<any>('http://52.220.168.61:8090/patientportal/appointmentschedule/getavaliableslots', { 'careprovideruid': careprovideruid, 'fromdate': fromdate, 'todate': todate, 'departmentuid': departmentuid } ,  { headers : {'orguid' : orguid , 'useruid' : careprovideruid }} );
   }
 
   getAge(dateString) {

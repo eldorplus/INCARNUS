@@ -157,11 +157,11 @@ export class InnerLayoutComponent implements OnInit {
     });
   }
 
-  cancelAppointmentPopup(id): void {
+  cancelAppointmentPopup(schid, slotid, orgid, useruid): void {
     const dialogRef = this.dialog.open(CancelAppoinmentDialog, {
       width: '400px',
       panelClass: 'sign-dialog-container',
-      data: { 'id': id }
+      data: { 'schid': schid , 'slotid' : slotid, 'orgid' : orgid , 'useruid' : useruid }
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');

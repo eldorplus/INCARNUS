@@ -85,7 +85,7 @@ export class PatientDetailsComponent implements OnInit {
             let values = this.frmPatientInfo.value;
 
 
-            let params: any = {
+           /* let params: any = {
                 address: { address: "" },
                 ageString: "",
                 contact: { countrycodeuid: null, mobilephone: values.WorkPhone, homephone: values.WorkPhone, emailid: values.EmailId },
@@ -108,7 +108,7 @@ export class PatientDetailsComponent implements OnInit {
                     });
 
                 }, e => { }
-            );
+            );*/
             console.log(this.frmPatientInfo);
         }
     }

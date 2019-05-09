@@ -97,21 +97,30 @@ export class DoctorAppointmentComponent implements OnInit, OnChanges {
           departmentuid: any = ''; //'569cb69f2d10b2d7eaf6fa5f';
 
         // SERVICE ONCE WORKS REMOVE BELOW CODE START HERE
-        let da = this.sampleData().freeSlots;
-        this.availableFreelots = da;
-        var dept = da.map(m => m.department);
-        this.doctordepartments = [];
-        dept.forEach(element => {
-          if (this.doctordepartments.filter(f => f._id == element._id).length == 0)
-            this.doctordepartments.push(element);
-        });
+        //let da = this.sampleData().freeSlots;
+        //this.availableFreelots = da;
+        //var dept = da.map(m => m.department);
+        //this.doctordepartments = [];
+        //dept.forEach(element => {
+          //if (this.doctordepartments.filter(f => f._id == element._id).length == 0)
+         //   this.doctordepartments.push(element);
+        //});
         // SERVICE ONCE WORKS REMOVE CODE END HERE
 
         this._doctorService.getavailableslots(orguid, careprovideruid, fromdate, todate, departmentuid).subscribe(s => {
-          if (!s) {
-
-          }
           console.log(s);
+          debug;
+          // SERVICE ONCE WORKS REMOVE BELOW CODE START HERE
+          let da = s.freeSlots;
+          this.availableFreelots = da;
+          var dept = da.map(m => m.department);
+          this.doctordepartments = [];
+          dept.forEach(element => {
+            if (this.doctordepartments.filter(f => f._id == element._id).length == 0)
+              this.doctordepartments.push(element);
+          });
+          // SERVICE ONCE WORKS REMOVE CODE END HERE
+
         }, e => {
           console.log(e);
         });

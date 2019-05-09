@@ -22,10 +22,6 @@
 
             </mat-form-field>
             <mat-form-field class="col-sm-12 p_0">
-                <input matInput placeholder="Middle Name" [formControl]="mname">
-
-            </mat-form-field>
-            <mat-form-field class="col-sm-12 p_0">
                 <mat-select placeholder="Select Gender" [formControl]="gender" required>
                     <mat-option [value]="''"> Select Gender </mat-option>
                     <mat-option *ngFor="let sl of genderList" [value]="sl._id">
